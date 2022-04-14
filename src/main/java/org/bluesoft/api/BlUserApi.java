@@ -47,3 +47,20 @@ public class BlUserApi {
         return Response.ok(uServices.prueba3()).build();
     }
 }
+/*
+CREATE DEFINER=`root`@`%` PROCEDURE `prueba`()
+BEGIN
+SELECT * FROM BlUser;
+END
+
+
+CREATE DEFINER=`root`@`%` PROCEDURE `pruebaf`()
+BEGIN
+	SELECT id,periodo FROM BlUser WHERE periodo="2022";
+END
+
+CREATE DEFINER=`root`@`%` PROCEDURE `pruebag`()
+BEGIN
+	SELECT id FROM BlUser WHERE periodo="2022";
+END
+*/
