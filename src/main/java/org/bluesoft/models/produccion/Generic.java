@@ -18,6 +18,7 @@ public class Generic extends PanacheEntityBase{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+    public Integer turn;
     public LocalDate date;
     public String operator;
     public Double start_vol;
