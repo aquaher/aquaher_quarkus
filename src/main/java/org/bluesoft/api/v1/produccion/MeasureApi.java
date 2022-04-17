@@ -1,0 +1,113 @@
+package org.bluesoft.api.v1.produccion;
+
+import java.time.LocalDate;
+
+import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.bluesoft.errors.AppMessageError;
+import org.bluesoft.models.produccion.Measure;
+import org.bluesoft.services.produccion.MeasureService;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
+import org.jboss.resteasy.annotations.jaxrs.QueryParam;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameters;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+
+@Path("measure")
+@Produces(MediaType.APPLICATION_JSON)
+@Tag(name="Medidores", description="Api para los medidores de energia")
+public class MeasureApi {
+
+    @Inject
+    MeasureService mService;
+    
+    @GET
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Measure[].class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    @Parameters
+    public Response getPaginateMeasure(
+        @QueryParam(value = "page_index") int index,
+        @QueryParam(value = "page_size") int size){
+        return Response.ok(mService.getMeasurePaginate(index, size)).build();
+    }
+    @POST
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Measure.class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    @Parameters
+    public Response createMeasure(Measure measure){
+        return Response.ok(mService.createBitacora(measure)).build();
+    }
+    @GET
+    @Path("date/{date}")
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Measure[].class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    @Parameters
+    public Response getPaginateByDate(@PathParam String date){
+        return Response.ok(mService.getMeasureByDate(LocalDate.parse(date))).build();
+    }
+    @GET
+    @Path("{measureId}")
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Measure.class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    @Parameters
+    public Response getMeasureById(@PathParam Long measureId){
+        return Response.ok(mService.getMeasureById(measureId)).build();
+    }
+}

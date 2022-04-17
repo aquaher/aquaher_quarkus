@@ -6,49 +6,65 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
+import org.bluesoft.errors.AppException;
 import org.bluesoft.models.BlUser;
-import org.bluesoft.repository.UserRepository;
+import org.jboss.logging.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.StoredProcedureQuery;
 
-//import javax.persistence.Procedure;
 @ApplicationScoped
-
 public class BlServices {
 
     @Inject
-    UserRepository uRepository;
+    Logger log;
+
     @Inject
     EntityManager entityManager;
 
     @Transactional
     public BlUser createUser(BlUser user){
-        uRepository.persist(user);
-        //StoredProcedureQuery uwu = entityManager.createQuery(qlString)
+        user.persist();
         return user;
     }
 
-    public List<BlUser> getAllUser(){return uRepository.listAll();} 
+    public List<BlUser> getAllUser(){return BlUser.listAll();} 
 
+    @SuppressWarnings("unchecked")
     public List<BlUser> prueba(){
-        StoredProcedureQuery result = entityManager.createStoredProcedureQuery("prueba",BlUser.class);
-
-        @SuppressWarnings("unchecked")
-        List<BlUser> blUser = result.getResultList();
-        return blUser;
+        try {
+            StoredProcedureQuery result = entityManager.createStoredProcedureQuery("prueba",BlUser.class);
+            List<BlUser> blUser = result.getResultList();
+            return blUser;
+        } catch (NoResultException e) {
+            throw new AppException(e.getMessage());
+        }
+        
     }
 
     public BlUser prueba2(){
-        StoredProcedureQuery result = entityManager.createStoredProcedureQuery("pruebaf",BlUser.class);
-        //@SuppressWarnings("unchecked")
-        BlUser blUser = (BlUser) result.getSingleResult();
-        return blUser;
+        try {
+            StoredProcedureQuery result = entityManager.createStoredProcedureQuery("pruebaf",BlUser.class);
+            BlUser blUser = (BlUser) result.getSingleResult();
+            return blUser;
+        } catch(NoResultException e){
+            throw new AppException(e.getMessage());
+        }
+        
     }
-    public Object prueba3(){
-        StoredProcedureQuery result = entityManager.createStoredProcedureQuery("pruebaf",Object.class);
-        //@SuppressWarnings("unchecked")
+    public BlUser prueba3(){
+        StoredProcedureQuery result = entityManager.createStoredProcedureQuery("pruebag");
         Object blUser = result.getSingleResult();
-        return blUser;
+        return new BlUser(blUser.toString());
+    }
+    public Object prueba4(){
+        try{
+            StoredProcedureQuery result = entityManager.createStoredProcedureQuery("pruebaq");
+            return result.getSingleResult();
+        }catch(NoResultException e){
+            throw new AppException(e.getMessage());
+        }
+        
     }
 }
