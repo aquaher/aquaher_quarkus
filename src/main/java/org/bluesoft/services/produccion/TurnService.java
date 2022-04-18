@@ -43,4 +43,13 @@ public class TurnService {
             throw new AppException("No existe el turno");
         }
     }
+    public Turn getLastTurn(){
+        try{
+            Turn t = Turn.find("id = (SELECT MAX(id) FROM p_method)", "params").firstResult();
+            if (t==null) throw new AppException("No hay turnos");
+            return t;
+        }catch(Exception e){
+            throw new AppException("No existe el turno");
+        }
+    }
 }

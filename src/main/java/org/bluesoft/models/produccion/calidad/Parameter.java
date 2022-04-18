@@ -19,6 +19,7 @@ public class Parameter extends PanacheEntityBase{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     public String name;
+    public Double result;
 
     @OneToOne
     public Method method;

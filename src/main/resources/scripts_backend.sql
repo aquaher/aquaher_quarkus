@@ -1,7 +1,7 @@
 USE backend;
 
 DROP PROCEDURE IF EXISTS `stp_parameter`;
-
+DROP PROCEDURE IF EXISTS `stp_turn_access`;
 DELIMITER $$
 
 CREATE PROCEDURE `stp_parameter` (
@@ -20,6 +20,34 @@ BEGIN
     `p_parameter` 
     ORDER BY id DESC
 	LIMIT 1;
+END$$
+
+CREATE PROCEDURE `stp_turn_access`(IN _date DATE)
+BEGIN
+	DECLARE v_date DATE;
+    DECLARE v_turn INTEGER;
+    SELECT turn,start_date INTO v_turn, v_date FROM `p_turn` WHERE id=(SELECT MAX(id) FROM `p_turn`); 
+    IF DAYOFWEEK(_date) = 7 OR DAYOFWEEK(_date) = 1 THEN
+		IF _date = v_date THEN
+			IF v_turn = 1 THEN
+				INSERT INTO `p_turn` (turn,start_date,start_time,end_date,end_time) VALUES (v_turn + 1, _date,'19:00:00',_date+1,'07:00:00');
+			END IF;
+		ELSE
+			INSERT INTO `p_turn` (turn,start_date,start_time,end_date,end_time) VALUES (1, _date,'07:00:00',_date,'19:00:00');
+		END IF;
+    ELSE
+		IF _date = v_date THEN
+			IF v_turn = 1 THEN
+				INSERT INTO `p_turn` (turn,start_date,start_time,end_date,end_time) VALUES (v_turn + 1, _date,'15:00:00',_date,'23:00:00');
+			ELSEIF v_turn = 2 THEN
+				INSERT INTO `p_turn` (turn,start_date,start_time,end_date,end_time) VALUES (v_turn + 1, _date,'23:00:00',_date+1,'07:00:00');
+			END IF;
+		ELSE
+			INSERT INTO `p_turn` (turn,start_date,start_time,end_date,end_time) VALUES (1, _date,'7:00:00',_date,'15:00:00');
+		END IF;
+	END IF;
+    
+    SELECT * FROM `p_turn` WHERE id=(SELECT MAX(id) FROM `p_turn`); 
 END$$
 
 DELIMITER ;
@@ -45,21 +73,21 @@ INSERT INTO `p_l_event` (name) VALUES ('DESINFECCION');
 INSERT INTO `p_l_event` (name) VALUES ('RETROLAVADOS');
 INSERT INTO `p_l_event` (name) VALUES ('DOSIFICACION');
 /*métodos de analisis p_method*/
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 1');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 2');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 3');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 4');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 5');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 6');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 7');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 8');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 9');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 10');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 11');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 12');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 13');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 14');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 15');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 16');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 17');
-INSERT INTO `p_method` (name) VALUES ('PRUEBA 18');
+INSERT INTO `p_method` (name) VALUES ('APHA 4500-H^+ B');
+INSERT INTO `p_method` (name) VALUES ('APHA 2130 B');
+INSERT INTO `p_method` (name) VALUES ('APHA 2510 B');
+INSERT INTO `p_method` (name) VALUES ('APHA 2520 B');
+INSERT INTO `p_method` (name) VALUES ('APHA 2520 B"');
+INSERT INTO `p_method` (name) VALUES ('APHA 2340 C ');
+INSERT INTO `p_method` (name) VALUES ('COLORIMETRIA');
+INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC2017');
+INSERT INTO `p_method` (name) VALUES ('METHOD 8506V');
+INSERT INTO `p_method` (name) VALUES ('APHA 4500-SO4^2- E\'"');
+INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC2046');
+INSERT INTO `p_method` (name) VALUES ('APHA 3500-Fe^IV');
+INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC4P55');
+INSERT INTO `p_method` (name) VALUES ('APHA 4500-Si D^VI');
+INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC3032C');
+SELECT NOW();
+SELECT DAYOFWEEK(NOW());
+
