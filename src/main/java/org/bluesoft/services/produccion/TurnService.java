@@ -1,11 +1,8 @@
 package org.bluesoft.services.produccion;
 
-import java.time.LocalDateTime;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import javax.transaction.Transactional;
 
@@ -33,17 +30,20 @@ public class TurnService {
     }
     public Turn getTurnByLast(){
         try{
-            Turn turno = eManager.createQuery("SELECT * FROM p_turn WHERE id = (SELECT MAX(id) FROM p_turn)",Turn.class).getSingleResult();
+            /**stp_verify_access_turn */
+            StoredProcedureQuery query = eManager.createStoredProcedureQuery("stp_verify_access_turn",Turn.class);
+            
+            Turn turno = (Turn) query.getSingleResult();
+
             return turno;
         }catch(Exception e){
-            throw new AppException("Hubo un error en actualizar");
-        } 
+            log.info(e.getMessage());
+            throw new AppException(e.getCause().getCause().getMessage());
+        }
     }
-    public Turn getLastTurn(Turn turn){
+    public Turn getLastTurn(){
         try{
             StoredProcedureQuery query = eManager.createStoredProcedureQuery("stp_turn_access",Turn.class);
-            query.registerStoredProcedureParameter("_date", LocalDateTime.class, ParameterMode.IN);
-            query.setParameter("_date", turn.start_date);
             Turn newTurn = (Turn) query.getSingleResult();
             return newTurn;
         }catch(Exception e){

@@ -31,6 +31,15 @@ public class BlServices {
 
     public List<BlUser> getAllUser(){return BlUser.listAll();} 
 
+    public BlUser getById(String id){
+        try {
+            return BlUser.findById(id);
+        } catch (NoResultException e) {
+            throw new AppException(e.getMessage());
+        }
+
+    };
+
     @SuppressWarnings("unchecked")
     public List<BlUser> prueba(){
         try {

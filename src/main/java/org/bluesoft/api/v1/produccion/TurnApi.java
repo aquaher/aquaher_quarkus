@@ -1,6 +1,7 @@
 package org.bluesoft.api.v1.produccion;
 
 import javax.inject.Inject;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -43,6 +44,45 @@ public class TurnApi {
     @Parameters
     public Response updateTurn(Turn turn){
         return Response.ok(tService.updateTurn(turn)).build();
+    }
+
+    @GET
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Turn.class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    public Response getTurnLast(){
+        return Response.ok(tService.getTurnByLast()).build();
+    }
+
+    @GET
+    @Path("/date")
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Turn.class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    public Response getTurnCreate(){
+        return Response.ok(tService.getLastTurn()).build();
     }
     
 }

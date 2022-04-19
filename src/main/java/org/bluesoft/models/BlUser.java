@@ -13,6 +13,7 @@ public class BlUser extends PanacheEntityBase {
     public String id;
     public String periodo;
     public String username;
+    public String type;
     public BlUser() {
     }
     public BlUser(String id, String periodo, String username) {

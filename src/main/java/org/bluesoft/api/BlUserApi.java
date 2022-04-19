@@ -15,6 +15,7 @@ import org.bluesoft.models.BlUser;
 import org.bluesoft.services.BlServices;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
@@ -37,7 +38,11 @@ public class BlUserApi {
     public BlUser createUser(BlUser blUser){
         return uServices.createUser(blUser);
     }
-    
+    @GET
+    @Path("{id}")
+    public Response getUserById(@PathParam String id){
+        return Response.ok(uServices.getById(id)).build();
+    }
     @GET
     @Path("prueba")
     public Response prueba(){
