@@ -23,10 +23,11 @@ public class TurnService {
     @Transactional
     public Turn updateTurn(Turn turn){
         try{
-            turn.persist();
-            return turn;
+            Turn turno = Turn.findById(turn.id);
+            turno.operador = turn.operador;
+            return turno;
         }catch(Exception e){
-            throw new AppException("Hubo un error en actualizar");
+            throw new AppException(e.getMessage());
         } 
     }
     public Turn getTurn(){
