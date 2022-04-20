@@ -3,6 +3,7 @@ package org.bluesoft.services.produccion;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.StoredProcedureQuery;
 import javax.transaction.Transactional;
 
@@ -28,13 +29,20 @@ public class TurnService {
             throw new AppException("Hubo un error en actualizar");
         } 
     }
+    public Turn getTurn(){
+        try{
+            Query query = eManager.createQuery("SELECT p FROM Turn p WHERE id = (SELECT MAX(id) FROM Turn)",Turn.class);
+            Turn turno = (Turn) query.getSingleResult();
+            return turno;
+        }catch(Exception e){
+            throw new AppException(e.getMessage());
+        }
+    }
     public Turn getTurnByLast(){
         try{
             /**stp_verify_access_turn */
             StoredProcedureQuery query = eManager.createStoredProcedureQuery("stp_verify_access_turn",Turn.class);
-            
             Turn turno = (Turn) query.getSingleResult();
-
             return turno;
         }catch(Exception e){
             log.info(e.getMessage());

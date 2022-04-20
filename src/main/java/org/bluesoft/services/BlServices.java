@@ -12,7 +12,6 @@ import org.jboss.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.StoredProcedureQuery;
 
 @ApplicationScoped
 public class BlServices {
@@ -40,40 +39,11 @@ public class BlServices {
 
     };
 
-    @SuppressWarnings("unchecked")
-    public List<BlUser> prueba(){
+    public List<BlUser> getUserByOperador(){
         try {
-            StoredProcedureQuery result = entityManager.createStoredProcedureQuery("prueba",BlUser.class);
-            List<BlUser> blUser = result.getResultList();
-            return blUser;
+            return BlUser.find("type", "operador").list();
         } catch (NoResultException e) {
             throw new AppException(e.getMessage());
         }
-        
-    }
-
-    public BlUser prueba2(){
-        try {
-            StoredProcedureQuery result = entityManager.createStoredProcedureQuery("pruebaf",BlUser.class);
-            BlUser blUser = (BlUser) result.getSingleResult();
-            return blUser;
-        } catch(NoResultException e){
-            throw new AppException(e.getMessage());
-        }
-        
-    }
-    public BlUser prueba3(){
-        StoredProcedureQuery result = entityManager.createStoredProcedureQuery("pruebag");
-        Object blUser = result.getSingleResult();
-        return new BlUser(blUser.toString());
-    }
-    public Object prueba4(){
-        try{
-            StoredProcedureQuery result = entityManager.createStoredProcedureQuery("pruebaq");
-            return result.getSingleResult();
-        }catch(NoResultException e){
-            throw new AppException(e.getMessage());
-        }
-        
     }
 }

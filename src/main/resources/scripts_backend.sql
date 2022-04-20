@@ -35,7 +35,7 @@ BEGIN
 		SIGNAL SQLSTATE '45001' SET MESSAGE_TEXT = 'No existe los turnos';
 	ELSE
 		IF @currentdate >= v_start_date AND @currentdate <= v_end_date THEN 
-			SELECT * FROM `p_turn`;
+			SELECT * FROM `p_turn` WHERE id=(SELECT MAX(id) FROM `p_turn`);
 		ELSE
 			SIGNAL SQLSTATE '45001' SET MESSAGE_TEXT = 'Registra tu turno';
         END IF;

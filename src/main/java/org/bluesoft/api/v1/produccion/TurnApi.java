@@ -84,5 +84,23 @@ public class TurnApi {
     public Response getTurnCreate(){
         return Response.ok(tService.getLastTurn()).build();
     }
-    
+    @GET
+    @Path("/last")
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Turn.class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    public Response getTurn(){
+        return Response.ok(tService.getTurn()).build();
+    }
 }
