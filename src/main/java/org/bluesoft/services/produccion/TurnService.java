@@ -8,6 +8,7 @@ import javax.persistence.StoredProcedureQuery;
 import javax.transaction.Transactional;
 
 import org.bluesoft.errors.AppException;
+import org.bluesoft.helper.Messaje;
 import org.bluesoft.models.produccion.operador.Turn;
 import org.jboss.logging.Logger;
 
@@ -39,12 +40,12 @@ public class TurnService {
             throw new AppException(e.getMessage());
         }
     }
-    public Turn getTurnByLast(){
+    public Messaje getVerifyTurn(){
         try{
             /**stp_verify_access_turn */
-            StoredProcedureQuery query = eManager.createStoredProcedureQuery("stp_verify_access_turn",Turn.class);
-            Turn turno = (Turn) query.getSingleResult();
-            return turno;
+            StoredProcedureQuery query = eManager.createStoredProcedureQuery("stp_verify_access_turn");
+            Object turno =  query.getSingleResult();
+            return new Messaje(turno.toString());
         }catch(Exception e){
             log.info(e.getMessage());
             throw new AppException(e.getCause().getCause().getMessage());

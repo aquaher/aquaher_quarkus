@@ -28,50 +28,51 @@ CREATE PROCEDURE `stp_verify_access_turn` ()
 BEGIN
 	DECLARE v_start_date DATETIME;
     DECLARE v_end_date DATETIME;
+    DECLARE v_operador VARCHAR(255);
 	SET @currentdate = NOW();
-    
-    SELECT start_date, end_date INTO v_start_date, v_end_date FROM `p_turn` WHERE id=(SELECT MAX(id) FROM `p_turn`); 
-    IF v_start_date IS NULL OR v_end_date IS NULL THEN
-		SIGNAL SQLSTATE '45001' SET MESSAGE_TEXT = 'No existe los turnos';
-	ELSE
-		IF @currentdate >= v_start_date AND @currentdate <= v_end_date THEN 
-			SELECT * FROM `p_turn` WHERE id=(SELECT MAX(id) FROM `p_turn`);
-		ELSE
-			SIGNAL SQLSTATE '45001' SET MESSAGE_TEXT = 'Registra tu turno';
-        END IF;
-    END IF;
+    SELECT start_date,end_date,operador INTO v_start_date,v_end_date,v_operador FROM `p_turn` WHERE id = (SELECT MAX(id) FROM `p_turn`);
+    IF @currentdate >= v_start_date AND @currentdate <= v_end_date AND v_operador IS NOT NULL THEN
+		SELECT 'registrado';
+	ELSEIF @currentdate >= v_end_date THEN
+		SELECT 'siguente';
+	ELSEIF v_operador IS NULL THEN
+		SELECT 'registra';
+	END IF;
 END$$
 
 CREATE PROCEDURE `stp_turn_access`()
 BEGIN
 	DECLARE v_start_date DATETIME;
+	DECLARE v_end_date DATETIME;
     DECLARE v_turn INTEGER;
-    DECLARE v_date_next DATE;
-    SET v_date_next :=DATE(DATE(NOW())+1);
-    SELECT turn,start_date INTO v_turn, v_start_date FROM `p_turn` WHERE id=(SELECT MAX(id) FROM `p_turn`);
+    DECLARE v_operador VARCHAR(255);
+    SET @date_time_now = NOW();
+    SET @date_now = DATE(NOW());
+    SET @date_next = DATE(DATE(NOW())+1);
+    SET @turn_1 = CONCAT(@date_now,' ',TIME('07:00:00'));
+    SET @turn_2 = CONCAT(@date_now,' ',TIME('15:00:00'));
+    SET @turn_3 = CONCAT(@date_now,' ',TIME('23:00:00'));
+    SET @turn_end = CONCAT(@date_next,' ',TIME('07:00:00'));
+    SET @turn_f_2 = CONCAT(@date_now,' ',TIME('19:00:00'));
+    SELECT end_date,start_date,turn,operador INTO  v_end_date,v_start_date,v_turn,v_operador FROM `p_turn` WHERE id = (SELECT MAX(id) FROM `p_turn`);
 
 	IF DAYOFWEEK(NOW()) = 7 OR DAYOFWEEK(NOW()) = 1 THEN
-		IF DATE(NOW()) = DATE(v_start_date) THEN
-			IF v_turn = 1 THEN
-				INSERT INTO `p_turn` (turn,start_date,end_date) VALUES (v_turn + 1, CONCAT(DATE(NOW()),' ' ,TIME('19:00:00')),CONCAT(v_date_next,' ' ,TIME('07:00:00')));
-			END IF;
-		ELSE
-			INSERT INTO `p_turn` (turn,start_date,end_date) VALUES (1, CONCAT(DATE(NOW()),' ' ,TIME('7:00:00')),CONCAT(DATE(NOW()),' ' ,TIME('19:00:00')));
+		IF @turn_1= v_start_date AND v_operador IS NOT NULL THEN
+			INSERT INTO `p_turn` (start_date,end_date,turn) VALUES (@turn_f_2 ,@turn_end,v_turn + 1);
+		ELSEIF v_operador IS NOT NULL THEN
+			INSERT INTO `p_turn` (start_date,end_date,turn) VALUES (@turn_1 ,@turn_f_2,1);
 		END IF;
 	ELSE
-		IF DATE(NOW())= DATE(v_start_date) THEN
-			IF v_turn = 1 THEN
-				INSERT INTO `p_turn` (turn,start_date,end_date) VALUES (v_turn + 1, CONCAT(DATE(NOW()),' ' ,TIME('15:00:00')),CONCAT(DATE(NOW()),' ' ,TIME('23:00:00')));
-			ELSEIF v_turn = 2 THEN
-				INSERT INTO `p_turn` (turn,start_date,end_date) VALUES (v_turn + 1, CONCAT(DATE(NOW()),' ' ,TIME('23:00:00')),CONCAT(v_date_next,' ' ,TIME('07:00:00')));
-			END IF;
-		ELSE
-			INSERT INTO `p_turn` (turn,start_date,end_date) VALUES (1, CONCAT(DATE(NOW()),' ' ,TIME('7:00:00')),CONCAT(DATE(NOW()),' ' ,TIME('15:00:00')));
+		IF @turn_1 = v_start_date AND v_operador IS NOT NULL THEN
+			INSERT INTO `p_turn` (end_date,start_date,turn) VALUES (@turn_3 ,@turn_2 ,v_turn + 1);
+		ELSEIF @turn_2 = v_start_date AND v_operador IS NOT NULL THEN
+			INSERT INTO `p_turn` (end_date,start_date,turn) VALUES (@turn_end ,@turn_3 ,v_turn + 1);
+		ELSEIF v_operador IS NOT NULL THEN 
+			INSERT INTO `p_turn` (end_date,start_date,turn) VALUES (@turn_2 ,@turn_1 ,1);
 		END IF;
 	END IF;
 
-    
-    SELECT * FROM `p_turn` WHERE id=(SELECT MAX(id) FROM `p_turn`); 
+	SELECT * FROM `p_turn` WHERE id = (SELECT MAX(id) FROM `p_turn`);
 END$$
 
 DELIMITER ;
@@ -112,7 +113,8 @@ INSERT INTO `p_method` (name) VALUES ('APHA 3500-Fe^IV');
 INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC4P55');
 INSERT INTO `p_method` (name) VALUES ('APHA 4500-Si D^VI');
 INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC3032C');
-
+/** TURNO*/
+INSERT INTO `p_turn` (end_date,start_date,turn) VALUES ('2022-04-20 15:00:00','2022-04-20 07:00:00', 1);
 /* TABLE KAYCLOAK*/
 USE keycloak;
 DROP TRIGGER IF EXISTS `after_create_user`;

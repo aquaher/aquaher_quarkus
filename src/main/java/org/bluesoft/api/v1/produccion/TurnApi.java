@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.bluesoft.errors.AppMessageError;
+import org.bluesoft.helper.Messaje;
 import org.bluesoft.models.produccion.operador.Turn;
 import org.bluesoft.services.produccion.TurnService;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -51,7 +52,7 @@ public class TurnApi {
             responseCode = "200",
             description = "Respuesta ok ",
             content = @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = Turn.class)
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Messaje.class)
             )
     )
     @APIResponse(
@@ -62,11 +63,11 @@ public class TurnApi {
             )
     )
     public Response getTurnLast(){
-        return Response.ok(tService.getTurnByLast()).build();
+        return Response.ok(tService.getVerifyTurn()).build();
     }
 
     @GET
-    @Path("/date")
+    @Path("/create")
     @APIResponse(
             responseCode = "200",
             description = "Respuesta ok ",
