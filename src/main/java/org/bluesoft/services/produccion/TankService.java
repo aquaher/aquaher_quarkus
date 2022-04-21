@@ -58,6 +58,19 @@ public class TankService {
         }
     }
     /**
+     * Obtener el tanque con typo de agua
+     * @param name
+     * @return
+     */
+    public List<Tank> getTankByWater(String name){
+        try{
+            String find = "%"+name+"%";
+            return Tank.find("water LIKE ?1", find).list();           
+        }catch(Exception e){
+            throw new AppException("No existe el tanque con nombre ".concat(name));
+        }
+    }
+    /**
      * Retorna todos los elementos en la tabla Tank
      * @return
      */

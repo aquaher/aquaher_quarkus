@@ -90,12 +90,12 @@ DELIMITER ;
 /*unidad de medida por defecto bl_unit*/
 INSERT INTO `bl_unit` (name,symbol) VALUES ('METROS CUBICOS', 'M3');
 /*datos de los tanques p_tank*/
-INSERT INTO `p_tank` (name,water) VALUES ('TK-1','AGUA PURIFICADA');
-INSERT INTO `p_tank` (name,water) VALUES ('TK-2','AGUA PURIFICADA');
-INSERT INTO `p_tank` (name,water) VALUES ('TK-3','AGUA GENÉRICA');
-INSERT INTO `p_tank` (name,water) VALUES ('TK-4','AGUA RECHAZO');
-INSERT INTO `p_tank` (name,water) VALUES ('TK-5','AGUA ULTRAFILTRADA');
-INSERT INTO `p_tank` (name,water) VALUES ('TK-6','AGUA CAPTADA');
+INSERT INTO `p_tank` (name,water) VALUES ('TQ-1','AGUA PURIFICADA');
+INSERT INTO `p_tank` (name,water) VALUES ('TQ-2','AGUA PURIFICADA');
+INSERT INTO `p_tank` (name,water) VALUES ('TQ-3','AGUA GENÉRICA');
+INSERT INTO `p_tank` (name,water) VALUES ('TQ-4','ALIMENTACIÓN DE OSMOSIS');
+INSERT INTO `p_tank` (name,water) VALUES ('TQ-5','AGUA ULTRAFILTRADA');
+INSERT INTO `p_tank` (name,water) VALUES ('TQ-6','ALIMENTACIÓN DE ULTRAFILTRACIÓN');
 /* eventos para la bitácora de produccion tabla p_l_event*/
 INSERT INTO `p_l_event` (name) VALUES ('PLANTA EN PRODUCCIÓN');
 INSERT INTO `p_l_event` (name) VALUES ('PLANTA DETENIDA');

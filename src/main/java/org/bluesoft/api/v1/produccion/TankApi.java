@@ -65,7 +65,7 @@ public class TankApi {
         return Response.ok(tService.createTank(tank)).build();
     }
     @GET
-    @Path("tank/{name}")
+    @Path("{name}")
     @APIResponse(
             responseCode = "200",
             description = "Respuesta ok ",
@@ -83,6 +83,26 @@ public class TankApi {
     @Parameters
     public Response getTankByName(@PathParam String name){
         return Response.ok(tService.getTankByName(name)).build();
+    }
+    @GET
+    @Path("water/{name}")
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Tank.class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    @Parameters
+    public Response getTankByWater(@PathParam String name){
+        return Response.ok(tService.getTankByWater(name)).build();
     }
     @GET
     @Path("tank/{tankId}")
