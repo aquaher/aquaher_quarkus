@@ -157,4 +157,32 @@ public class WaterApi {
     public Response getWaterById(@PathParam long id){
         return Response.ok(wService.getWaterById(id)).build();
     }
+
+    @GET
+    @Path("p_verify")
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Water.class)
+            )
+    )
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Water[].class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    @Parameters
+    public Response getWaterByTankWater(@QueryParam String name,@QueryParam long turn){
+        return Response.ok(wService.getWaterVerifyRegister(name,turn)).build();
+    }
 }

@@ -14,6 +14,7 @@ import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 import org.bluesoft.errors.AppException;
 import org.bluesoft.models.produccion.Water;
+import org.bluesoft.models.produccion.dto.WaterDto;
 
 @ApplicationScoped
 public class WaterService {
@@ -90,6 +91,21 @@ public class WaterService {
             List<Water> water = Water.find("tank.id", tankId).list();
             if(water.isEmpty()) throw new AppException("No existen un registro en el tipo de agua purificada");
             return water;            
+        }catch(Exception e){
+            throw new AppException(e.getMessage());
+        }
+    }
+    /**
+     * Retorna un mensaje para saber si ya hay registro en el turno
+     * @param tankId
+     * @return
+     */
+    public Object getWaterVerifyRegister(String name, long turn){
+        try{
+            List<WaterDto> water = Water.find("tank.water = ?1 AND turn.id = ?2", name,turn).project(WaterDto.class).list();
+            if(water.isEmpty()) return new Water();
+            if(water.size()==2) return water;
+            return water.get(0);            
         }catch(Exception e){
             throw new AppException(e.getMessage());
         }
