@@ -39,21 +39,5 @@ public class Tank extends PanacheEntityBase {
         orphanRemoval = true
     )
     @JsonIgnore
-    public Set<Purified> purified;
-
-    @OneToMany(
-        mappedBy = "tank",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
-    )
-    @JsonIgnore
-    public Set<Ultrafiltered> ultrafiltered;
-
-    @OneToMany(
-        mappedBy = "tank",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
-    )
-    @JsonIgnore
-    public Set<Generic> generic;
+    public Set<Water> purified;
 }

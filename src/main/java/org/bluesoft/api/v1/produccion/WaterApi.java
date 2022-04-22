@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.bluesoft.errors.AppMessageError;
-import org.bluesoft.models.produccion.Purified;
+import org.bluesoft.models.produccion.Water;
 import org.bluesoft.services.produccion.WaterService;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -22,10 +22,10 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameters;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 
-@Path("purified")
+@Path("agua")
 @Produces(MediaType.APPLICATION_JSON)
-@Tag(name="Purificada", description="Api para el tipo de agua de Purificada")
-public class PurifiedApi {
+@Tag(name="Agua", description="Api para los tipo de agua con su tanque")
+public class WaterApi {
     
     @Inject
     WaterService wService;
@@ -35,7 +35,7 @@ public class PurifiedApi {
             responseCode = "200",
             description = "Respuesta ok ",
             content = @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = Purified[].class)
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Water[].class)
             )
     )
     @APIResponse(
@@ -46,17 +46,17 @@ public class PurifiedApi {
             )
     )
     @Parameters
-    public Response getPurifiedPagination(
+    public Response getWaterPagination(
         @QueryParam(value = "page_index") int index,
         @QueryParam(value = "page_size") int size){
-        return Response.ok(wService.getPurifiedByPaginate(index, size)).build();
+        return Response.ok(wService.getWaterByPaginate(index, size)).build();
     }
     @POST
     @APIResponse(
             responseCode = "200",
             description = "Respuesta ok ",
             content = @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = Purified.class)
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Water.class)
             )
     )
     @APIResponse(
@@ -67,8 +67,8 @@ public class PurifiedApi {
             )
     )
     @Parameters
-    public Response createPurified(Purified purified){
-        return Response.ok(wService.createPurified(purified)).build();
+    public Response createWater(Water water){
+        return Response.ok(wService.createWater(water)).build();
     }
     @GET
     @Path("date/{date}")
@@ -76,7 +76,7 @@ public class PurifiedApi {
             responseCode = "200",
             description = "Respuesta ok ",
             content = @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = Purified[].class)
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Water[].class)
             )
     )
     @APIResponse(
@@ -87,8 +87,8 @@ public class PurifiedApi {
             )
     )
     @Parameters
-    public Response getPurifiedByDate(@PathParam String date){
-        return Response.ok(wService.getPurifiedByDate(LocalDate.parse(date))).build();
+    public Response getWaterByDate(@PathParam String date){
+        return Response.ok(wService.getWaterByDate(LocalDate.parse(date))).build();
     }
     @GET
     @Path("tank/{tankId}")
@@ -96,7 +96,7 @@ public class PurifiedApi {
             responseCode = "200",
             description = "Respuesta ok ",
             content = @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = Purified[].class)
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Water[].class)
             )
     )
     @APIResponse(
@@ -107,8 +107,8 @@ public class PurifiedApi {
             )
     )
     @Parameters
-    public Response getPurifiedByTankId(@PathParam long tankId){
-        return Response.ok(wService.getPurifiedByTankId(tankId)).build();
+    public Response getWaterByTankId(@PathParam long tankId){
+        return Response.ok(wService.getWaterByTankId(tankId)).build();
     }
     @GET
     @Path("turn/{turn}")
@@ -116,7 +116,14 @@ public class PurifiedApi {
             responseCode = "200",
             description = "Respuesta ok ",
             content = @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = Purified[].class)
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Water[].class)
+            )
+    )
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Water.class)
             )
     )
     @APIResponse(
@@ -127,8 +134,8 @@ public class PurifiedApi {
             )
     )
     @Parameters
-    public Response getPurifiedByTurn(@PathParam long turn){
-        return Response.ok(wService.getPurifiedByTurn(turn)).build();
+    public Response getWaterByTurn(@PathParam long turn){
+        return Response.ok(wService.getWaterByTurn(turn)).build();
     }
     @GET
     @Path("{id}")
@@ -136,7 +143,7 @@ public class PurifiedApi {
             responseCode = "200",
             description = "Respuesta ok ",
             content = @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = Purified.class)
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Water.class)
             )
     )
     @APIResponse(
@@ -147,7 +154,7 @@ public class PurifiedApi {
             )
     )
     @Parameters
-    public Response getPurifiedById(@PathParam long id){
-        return Response.ok(wService.getPurifiedById(id)).build();
+    public Response getWaterById(@PathParam long id){
+        return Response.ok(wService.getWaterById(id)).build();
     }
 }
