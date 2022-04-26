@@ -1,6 +1,6 @@
 package org.bluesoft.models.produccion;
 
-import java.time.LocalDate;
+
 import java.time.LocalTime;
 
 import javax.persistence.Entity;
@@ -20,7 +20,6 @@ public class Measure extends PanacheEntityBase{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-    public LocalDate measurement_date;
     public LocalTime measurement_time;
     public Double measurement_channel;
     public Double reading_kwh_1;
