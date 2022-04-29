@@ -185,4 +185,10 @@ public class WaterApi {
     public Response getWaterByTankWater(@QueryParam String name,@QueryParam long turn){
         return Response.ok(wService.getWaterVerifyRegister(name,turn)).build();
     }
+    @GET
+    @Path("tank_month")
+    @Parameters
+    public Response getWaterByWater(@QueryParam String tankName,@QueryParam int month){
+        return Response.ok(wService.getWaterByTankAndMonth(tankName, month)).build();
+    }
 }
