@@ -124,7 +124,8 @@ INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC4P55');
 INSERT INTO `p_method` (name) VALUES ('APHA 4500-Si D^VI');
 INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC3032C');
 /** TURNO*/
-INSERT INTO `p_turn` (end_date,start_date,turn) VALUES ('2022-04-20 15:00:00','2022-04-20 07:00:00', 1);
+INSERT INTO `p_turn` (start_date) VALUES ('1900-04-04 07:00:00');
+
 /* TABLE KAYCLOAK*/
 USE keycloak;
 DROP TRIGGER IF EXISTS `after_create_user`;
