@@ -22,6 +22,7 @@ public class BlMenu extends PanacheEntityBase {
     public Long id;
     public String title;
     public String module;
+    public String icon;
     public Long orden;
 
     @OneToMany(
