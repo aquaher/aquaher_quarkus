@@ -19,5 +19,8 @@ public class BlAccess extends PanacheEntityBase {
 
     @ManyToOne
     public BlMenu menu;
+
+    @ManyToOne
+    public BlUser user;
     
 }

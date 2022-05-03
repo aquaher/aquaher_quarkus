@@ -20,6 +20,7 @@ public class BlMenu extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
+    public String path;
     public String title;
     public String module;
     public String icon;
