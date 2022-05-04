@@ -21,6 +21,11 @@ public class BlAccessDto {
         this.icon = icon;
         this.orden = orden;
     }
+    @Override
+    public String toString() {
+        return "BlAccessDto [icon=" + icon + ", id=" + id + ", module=" + module + ", orden=" + orden + ", path=" + path
+                + ", title=" + title + "]";
+    }
     
     
 }

@@ -152,9 +152,9 @@ INSERT INTO `backend`.`p_water` (`dispatch`,`end_vol`,`start_vol`,`total_produce
 
 /* MENU*/
 
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('INICIO',0,'INICIO','dashboard','m_base.m_inicio');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'PRODUCCION','produccion','m_base.m_produccion');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'OPERADORES','produccion','m_base.m_produccion.m_operadores');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('INICIO',0,'INICIO','dashboard','inicio');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'PRODUCCION','produccion','produccion');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'OPERADORES','produccion','produccion/operadores');
 
 /*ACCESS menu*/
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (1,'id_usuario');
