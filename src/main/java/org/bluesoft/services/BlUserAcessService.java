@@ -1,6 +1,8 @@
 package org.bluesoft.services;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -8,7 +10,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import org.bluesoft.errors.AppException;
-
+import org.bluesoft.models.AccessSchema;
 import org.bluesoft.models.BlAccess;
 import org.jboss.logging.Logger;
 
@@ -20,41 +22,45 @@ public class BlUserAcessService {
     @Inject
     EntityManager entityManager;
 
-    public List<BlAccessDto> getAccessMenuUser(String id){
+    public List<AccessSchema> getAccessMenuUser(String id){
         try {
 
             List<BlAccessDto> accesos = BlAccess.find("user.id", id).project(BlAccessDto.class).list();
-            return accesos;
+            List<AccessSchema> menu = new ArrayList<>();
+            accesos.forEach(data->{
+                List<String> nav = new ArrayList<>(Arrays.asList(data.path.split("/")));
+                MenuItem(menu, data, nav);
+            });
+            return menu;
             //return createList(accesos);
         } catch (Exception e) {
             throw new AppException(e.getMessage());
         }
     }
-    /*
-    private List<AccessSchema> createList(List<BlAccessDto> accesos){
-        List<AccessSchema> data = new ArrayList<>();
-        accesos.forEach(el->{
-            String[] menu_s = el.path.split("\\.");
-            for (int i = 0; i < menu_s.length; i++) {
-                String path = menu_s[i];
-                if(i==0){
-                    AccessSchema exist = data.stream().filter(e->e.path.equals(path)).findFirst().orElse(null);
-                    if(exist==null){
-                        data.add(new AccessSchema(el.icon, path, el.title, new ArrayList<>()));
-                    }
-                }
-                if(i>=1){
-                    String pathAnt = menu_s[i-1];
-                    AccessSchema anterior = data.stream().filter(e->e.path.equals(pathAnt)).findFirst().orElse(null);
-                    int indexAnte = data.indexOf(anterior);
-                    AccessSchema nuevo = anterior.items.stream().filter(e->e.path.equals(path)).findFirst().orElse(null); 
-                    if(nuevo==null){
-                        anterior.items.add(new AccessSchema(el.icon, path, el.title, new ArrayList<>()));
-                        data.set(indexAnte, anterior);
-                    }
-                }
-            }
-        });
-        return data;
-    }*/
+    private Boolean hasChildren(List<String> nav){
+        return !(nav.size()==1);
+    }
+    private void MenuItem(List<AccessSchema> data, BlAccessDto item, List<String> nav){
+        if(hasChildren(nav)){
+            MultiItem(
+                data.stream()
+                .filter(e->e.icon.equals(nav.get(0)))
+                .findFirst()
+                .get(), 
+                item, 
+                nav
+            );
+        }
+        else{
+            Item(data, item);
+        }
+    }
+
+    private void Item(List<AccessSchema> data, BlAccessDto item){
+        data.add(new AccessSchema(item.module, item.icon, "/"+item.path, item.title, new ArrayList<>()));
+    }
+    private void MultiItem(AccessSchema data, BlAccessDto item,List<String> nav){
+        nav.remove(0);
+        MenuItem(data.items, item, nav);
+    }
 }
