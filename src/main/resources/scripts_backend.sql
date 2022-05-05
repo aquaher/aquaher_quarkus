@@ -126,6 +126,15 @@ INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC3032C');
 /** TURNO*/
 INSERT INTO `p_turn` (start_date) VALUES ('1900-04-04 07:00:00');
 
+/* MENU*/
+/*el icono debe ser el mismo nombre que el path final y la lista que envio debe estar ordenada*/
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('INICIO',0,'INICIO','inicio','');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'PRODUCCION','produccion','produccion');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'OPERADORES','operadores','produccion/operadores');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA PURIFICADA','purificada','produccion/operadores/purificada');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA ULTRAFILTRADA','ultrafiltrada','produccion/operadores/ultrafiltrada');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA GENERICA','generica','produccion/operadores/generica');
+
 /* TABLE KAYCLOAK*/
 USE keycloak;
 DROP TRIGGER IF EXISTS `after_create_user`;
