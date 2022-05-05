@@ -151,12 +151,18 @@ INSERT INTO `backend`.`p_water` (`dispatch`,`end_vol`,`start_vol`,`total_produce
 INSERT INTO `backend`.`p_water` (`dispatch`,`end_vol`,`start_vol`,`total_produced`,`tank_id`,`turn_id`) VALUES (300,1000,1100,400,2,34);
 
 /* MENU*/
-
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('INICIO',0,'INICIO','dashboard','inicio');
+/*el icono debe ser el mismo nombre que el path final y la lista que envio debe estar ordenada*/
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('INICIO',0,'INICIO','inicio','inicio');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'PRODUCCION','produccion','produccion');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'OPERADORES','produccion','produccion/operadores');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'OPERADORES','operadores','produccion/operadores');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA PURIFICADA','purificada','produccion/operadores/purificada');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA ULTRAFILTRADA','ultrafiltrada','produccion/operadores/ultrafiltrada');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA GENERICA','generica','produccion/operadores/generica');
 
-/*ACCESS menu*/
-INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (1,'id_usuario');
-INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (2,'id_usuario');
-INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (3,'id_usuario');
+/*ACCESS menu el id del usuario debe existir*/
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (1,'228c2292-7349-4533-b7b0-c2618738a136');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (2,'228c2292-7349-4533-b7b0-c2618738a136');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (3,'228c2292-7349-4533-b7b0-c2618738a136');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (4,'228c2292-7349-4533-b7b0-c2618738a136');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (5,'228c2292-7349-4533-b7b0-c2618738a136');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (6,'228c2292-7349-4533-b7b0-c2618738a136');
