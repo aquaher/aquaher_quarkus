@@ -157,3 +157,5 @@ INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (3,'228c2292-7349
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (4,'228c2292-7349-4533-b7b0-c2618738a136');
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (5,'228c2292-7349-4533-b7b0-c2618738a136');
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (6,'228c2292-7349-4533-b7b0-c2618738a136');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (7,'228c2292-7349-4533-b7b0-c2618738a136');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (8,'228c2292-7349-4533-b7b0-c2618738a136');

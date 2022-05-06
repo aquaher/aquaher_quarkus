@@ -131,6 +131,8 @@ INSERT INTO `p_turn` (start_date) VALUES ('1900-04-04 07:00:00');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('INICIO',0,'INICIO','inicio','');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'PRODUCCION','produccion','produccion');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'OPERADORES','operadores','produccion/operadores');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'BITÁCORA','bitacora','produccion/operadores/bitacora');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'MEDIDOR','medidor','produccion/operadores/medidor');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA PURIFICADA','purificada','produccion/operadores/purificada');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA ULTRAFILTRADA','ultrafiltrada','produccion/operadores/ultrafiltrada');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA GENERICA','generica','produccion/operadores/generica');

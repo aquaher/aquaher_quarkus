@@ -182,8 +182,8 @@ public class WaterApi {
             )
     )
     @Parameters
-    public Response getWaterByTankWater(@QueryParam String name,@QueryParam long turn){
-        return Response.ok(wService.getWaterVerifyRegister(name,turn)).build();
+    public Response getWaterByTankWater(@QueryParam long tank_id,@QueryParam long turn_id){
+        return Response.ok(wService.getWaterVerifyRegister(tank_id,turn_id)).build();
     }
     @GET
     @Path("tank_month")

@@ -115,15 +115,10 @@ public class WaterService {
      * @param tankId
      * @return
      */
-    public Object getWaterVerifyRegister(String name, long turn) {
+    public WaterDto getWaterVerifyRegister(long tank_id, long turn) {
         try {
-            List<WaterDto> water = Water.find("tank.water = ?1 AND turn.id = ?2", name, turn).project(WaterDto.class)
-                    .list();
-            if (water.isEmpty())
-                return new Water();
-            if (water.size() == 2)
-                return water;
-            return water.get(0);
+            WaterDto water = Water.find("tank.id = ?1 AND turn.id = ?2", tank_id, turn).project(WaterDto.class).firstResult();
+            return water;
         } catch (Exception e) {
             throw new AppException(e.getMessage());
         }
