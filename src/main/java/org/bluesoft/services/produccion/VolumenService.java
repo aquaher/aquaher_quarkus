@@ -29,10 +29,10 @@ public class VolumenService {
         }
     }
     @Transactional
-    public Volumen putVolumenRegister(int id, int vol){
+    public Volumen putVolumenRegister(Volumen volumen){
         try{
-            Volumen volumenEdit = Volumen.findById(id);
-            volumenEdit.vol = vol;
+            Volumen volumenEdit = Volumen.findById(volumen.id);
+            volumenEdit.vol = volumen.vol;
             return volumenEdit;
         }catch(Exception e){
             throw new AppException("Lo sentimos no pudimos editar el registro");
@@ -46,11 +46,21 @@ public class VolumenService {
             throw new AppException("Lo sentimos no pudimos Obtener la lista de volumenes");
         }
     }
-    public Volumen getVolumenById(int id){
+    public Volumen getVolumenById(long id){
         try{
             return Volumen.findById(id);
         }catch(Exception e){
             throw new AppException("Lo sentimos no pudimos obtener el volumen");
+        }
+    }
+
+    public Volumen getVolByTurnAndTank(long turn,long tank){
+
+        try{
+            Volumen volumen = Volumen.find("turn.id = ?1 AND tank.id = ?2", turn,tank).singleResult();
+            return volumen;
+        }catch(Exception e){
+            throw new AppException(e.getMessage());
         }
     }
 }

@@ -20,4 +20,5 @@ public class Turn extends PanacheEntityBase{
     public String operador;
     public LocalDateTime start_date;
     public LocalDateTime end_date;
+    public Boolean active;
 }

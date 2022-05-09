@@ -30,12 +30,18 @@ public class VolumenApi {
         return Response.ok(vService.setVolumenRegister(volumen)).build();
     }
     @PUT
-    public Response crearVolumen(@QueryParam int id,@QueryParam int vol){
-        return Response.ok(vService.putVolumenRegister(id, vol)).build();
+    public Response editVolumen(Volumen volumen){
+        return Response.ok(vService.putVolumenRegister(volumen)).build();
+    }
+    @GET
+    @Path("vol")
+    public Response getVolByTurnAndTank(@QueryParam int turn,@QueryParam int tank){
+        return Response.ok(vService.getVolByTurnAndTank(turn, tank)).build();
     }
     @GET
     @Path("informe")
     public Response getVolumensByMonthAndTurn(@QueryParam int month,@QueryParam int turn, @QueryParam String name){
         return Response.ok(vService.getVolByTurnAndMonth(month, turn,name)).build();
     }
+
 }

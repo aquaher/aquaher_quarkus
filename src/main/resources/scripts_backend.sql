@@ -30,7 +30,7 @@ BEGIN
     DECLARE v_end_date DATETIME;
     DECLARE v_operador VARCHAR(255);
 	SET @currentdate = NOW();
-    SELECT start_date,end_date,operador INTO v_start_date,v_end_date,v_operador FROM `p_turn` WHERE id = (SELECT MAX(id) FROM `p_turn`);
+    SELECT start_date,end_date,operador INTO v_start_date,v_end_date,v_operador FROM `p_turn` WHERE `active` = 1;
     IF @currentdate >= v_start_date AND @currentdate <= v_end_date AND v_operador IS NOT NULL THEN
 		SELECT 'registrado';
 	ELSEIF @currentdate >= v_end_date THEN
@@ -52,37 +52,42 @@ BEGIN
     SET @turn_3 = CONCAT(@date_now,' ',TIME('23:00:00'));
     SET @turn_end = CONCAT(@date_next,' ',TIME('07:00:00'));
     SET @turn_f_2 = CONCAT(@date_now,' ',TIME('19:00:00'));
-    SELECT turn,end_date INTO v_turn,v_end_date FROM `p_turn` WHERE id = (SELECT MAX(id) FROM `p_turn`);
+    SELECT turn,end_date INTO v_turn,v_end_date FROM `p_turn` WHERE `active` = 1;
 
 	IF DAYOFWEEK(NOW()) = 7 OR DAYOFWEEK(NOW()) = 1 THEN
 		IF @date_actual >= @turn_1 AND @date_actual <= @turn_f_2 THEN
 			IF v_turn <> 1 OR @date_actual>=v_end_date THEN
-				INSERT INTO `p_turn` (start_date,end_date,turn) VALUES (@turn_1 ,@turn_f_2 ,1);
+				UPDATE `p_turn` SET `active` = 0 WHERE (`active` = '1');
+				INSERT INTO `p_turn` (start_date,end_date,turn,active) VALUES (@turn_1 ,@turn_f_2 ,1,1);
 			END IF;
 		END IF;
         IF @date_actual >= @turn_f_2 AND @date_actual <= @turn_end THEN
 			IF v_turn <> 2 OR @date_actual>=v_end_date THEN
-				INSERT INTO `p_turn` (start_date,end_date,turn) VALUES (@turn_f_2 ,@turn_end ,2);
+				UPDATE `p_turn` SET `active` = 0 WHERE (`active` = '1');
+				INSERT INTO `p_turn` (start_date,end_date,turn,active) VALUES (@turn_f_2 ,@turn_end ,2,1);
 			END IF;
 		END IF;
 	ELSE
 		IF @date_actual >= @turn_1 AND @date_actual <= @turn_2 THEN
 			IF v_turn <> 1 OR @date_actual>=v_end_date THEN
-				INSERT INTO `p_turn` (start_date,end_date,turn) VALUES (@turn_1 ,@turn_2 ,1);
+				UPDATE `p_turn` SET `active` = 0 WHERE (`active` = '1');
+				INSERT INTO `p_turn` (start_date,end_date,turn,active) VALUES (@turn_1 ,@turn_2 ,1,1);
 			END IF;
 		END IF;
         IF @date_actual >= @turn_2 AND @date_actual <= @turn_3 THEN
 			IF v_turn <> 2 OR @date_actual>=v_end_date  THEN
-				INSERT INTO `p_turn` (start_date,end_date,turn) VALUES (@turn_2 ,@turn_3 ,2);
+				UPDATE `p_turn` SET `active` = 0 WHERE (`active` = '1');
+				INSERT INTO `p_turn` (start_date,end_date,turn,active) VALUES (@turn_2 ,@turn_3 ,2,1);
 			END IF;
 		END IF;
         IF @date_actual >= @turn_3 AND @date_actual <= @turn_end THEN
 			IF v_turn <> 3 OR @date_actual>=v_end_date  THEN
-				INSERT INTO `p_turn` (start_date,end_date,turn) VALUES (@turn_3 ,@turn_end ,3);
+				UPDATE `p_turn` SET `active` = 0 WHERE (`active` = '1');
+				INSERT INTO `p_turn` (start_date,end_date,turn,active) VALUES (@turn_3 ,@turn_end ,3,1);
 			END IF;
 		END IF;
 	END IF;
-	SELECT * FROM `p_turn` WHERE id = (SELECT MAX(id) FROM `p_turn`);
+	SELECT * FROM `p_turn` WHERE `active` = 1;
 END$$
 
 DELIMITER ;
