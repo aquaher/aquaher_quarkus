@@ -43,6 +43,20 @@ public class WaterService {
             throw new AppException("Lo sentimos no pudimos crear un registro del tipo de agua purificada");
         }
     }
+    @Transactional
+    public Water editWater(Water water){
+        try {
+            Water waterUp = Water.findById(water.id);
+            waterUp.backwash = water.backwash;
+            waterUp.dispatch = water.dispatch;
+            waterUp.end_vol = water.end_vol;
+            waterUp.start_vol = water.start_vol;
+            waterUp.total_produced = water.total_produced;
+            return waterUp;
+        } catch (Exception e) {
+            throw new AppException("Lo sentimos no pudimos crear un registro del tipo de agua purificada");
+        }
+    }
 
     /**
      * Retorna el registro con id

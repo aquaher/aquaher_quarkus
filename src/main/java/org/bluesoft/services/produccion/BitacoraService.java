@@ -128,4 +128,14 @@ public class BitacoraService {
             throw new AppException(e.getMessage());
         }
     }
+
+    public List<Bitacora> getBitacoraByMonth(int month){
+        try{
+            List<Bitacora> bitacora = Bitacora.find("MONTH(turn.start_date)", month).list();
+            if(bitacora.isEmpty()) throw new AppException("No existen datos ");
+            return bitacora;            
+        }catch(Exception e){
+            throw new AppException(e.getMessage());
+        }
+    }
 }

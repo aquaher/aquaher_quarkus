@@ -129,13 +129,23 @@ INSERT INTO `p_turn` (start_date) VALUES ('1900-04-04 07:00:00');
 /* MENU*/
 /*el icono debe ser el mismo nombre que el path final y la lista que envio debe estar ordenada*/
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('INICIO',0,'INICIO','inicio','');
+/*MENU PRODUCCION*/
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'PRODUCCION','produccion','produccion');
+/*OPERADORES*/
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'OPERADORES','operadores','produccion/operadores');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'VOLUMENES','volumen','produccion/operadores/volumen');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'BITÁCORA','bitacora','produccion/operadores/bitacora');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'MEDIDOR','medidor','produccion/operadores/medidor');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA PURIFICADA','purificada','produccion/operadores/purificada');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA ULTRAFILTRADA','ultrafiltrada','produccion/operadores/ultrafiltrada');
 INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA GENERICA','generica','produccion/operadores/generica');
+/*LISTA DE INFORMES PORDUCCION*/
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'LISTA DE INFORMES','informe','produccion/informe');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE BITÁCORA','bitacora','produccion/informe/bitacora');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE MEDIDORES','medidor','produccion/informe/medidor');
+#INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE TANQUES','tanque','produccion/datos_maestros/informe/tanque');
+INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE VOLUMENES DE AGUA','volumen','produccion/informe/volumen');
+
 
 /* TABLE KAYCLOAK*/
 USE keycloak;

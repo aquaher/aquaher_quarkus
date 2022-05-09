@@ -149,6 +149,85 @@ INSERT INTO `backend`.`p_water` (`dispatch`,`end_vol`,`start_vol`,`total_produce
 
 INSERT INTO `backend`.`p_water` (`dispatch`,`end_vol`,`start_vol`,`total_produced`,`tank_id`,`turn_id`) VALUES (300,1100,1200,400,1,34);
 INSERT INTO `backend`.`p_water` (`dispatch`,`end_vol`,`start_vol`,`total_produced`,`tank_id`,`turn_id`) VALUES (300,1000,1100,400,2,34);
+/*VOLUMENES DE PRUEBA*/
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(400,1,2);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(410,2,2);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(300,3,2);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(200,4,2);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(120,5,2);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(300,6,2);
+
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(200,1,3);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(123,2,3);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(312,3,3);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(123,4,3);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(612,5,3);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(821,6,3);
+
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(300,1,4);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(223,2,4);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(412,3,4);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(123,4,4);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(512,5,4);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(321,6,4);
+
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(420,1,5);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(143,2,5);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(312,3,5);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(163,4,5);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(612,5,5);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(861,6,5);
+
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(210,1,6);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(513,2,6);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(152,3,6);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(123,4,6);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(232,5,6);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(611,6,6);
+
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(512,1,7);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(124,2,7);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(465,3,7);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(546,4,7);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(723,5,7);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(152,6,7);
+
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(512,1,8);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(623,2,8);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(614,3,8);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(613,4,8);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(263,5,8);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(732,6,8);
+
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(720,1,9);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(643,2,9);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(312,3,9);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(463,4,9);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(112,5,9);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(261,6,9);
+
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(620,1,10);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(743,2,10);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(812,3,10);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(963,4,10);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(412,5,10);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(361,6,10);
+
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(612,1,11);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(235,2,11);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(623,3,11);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(724,4,11);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(722,5,11);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(982,6,11);
+
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(420,1,12);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(143,2,12);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(312,3,12);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(163,4,12);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(612,5,12);
+INSERT INTO `backend`.`p_volumen` (`vol`,`tank_id`,`turn_id`) VALUES(861,6,12);
+
+
 
 /*ACCESS menu el id del usuario debe existir*/
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (1,'228c2292-7349-4533-b7b0-c2618738a136');
@@ -159,3 +238,12 @@ INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (5,'228c2292-7349
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (6,'228c2292-7349-4533-b7b0-c2618738a136');
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (7,'228c2292-7349-4533-b7b0-c2618738a136');
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (8,'228c2292-7349-4533-b7b0-c2618738a136');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (9,'228c2292-7349-4533-b7b0-c2618738a136');
+
+
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (10,'4a72c1d7-9f83-4e7e-87ba-b03e11b59973');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (11,'4a72c1d7-9f83-4e7e-87ba-b03e11b59973');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (12,'4a72c1d7-9f83-4e7e-87ba-b03e11b59973');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (13,'4a72c1d7-9f83-4e7e-87ba-b03e11b59973');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (1,'4a72c1d7-9f83-4e7e-87ba-b03e11b59973');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (2,'4a72c1d7-9f83-4e7e-87ba-b03e11b59973');

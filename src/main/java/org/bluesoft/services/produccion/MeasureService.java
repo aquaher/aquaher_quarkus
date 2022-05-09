@@ -29,12 +29,27 @@ public class MeasureService {
      * @return
      */
     @Transactional
-    public Measure createBitacora(Measure measure){
+    public Measure createMeasure(Measure measure){
         try{
             measure.persist();
             return measure;
         }catch(Exception e){
             throw new AppException("Lo sentimos no pudimos crear un registro en la bitacora");
+        }
+    }
+    @Transactional
+    public Measure editMeasure(Measure measure){
+        try{
+            Measure editMeasure = Measure.findById(measure.id);
+            editMeasure.measurement_channel = measure.measurement_channel;
+            editMeasure.measurement_time = measure.measurement_time;
+            editMeasure.reading_kvarh_14 = measure.reading_kvarh_14;
+            editMeasure.reading_kvarh_8 = measure.reading_kvarh_8;
+            editMeasure.reading_kwh_1 = measure.reading_kwh_1;
+            editMeasure.reading_kwh_13 = measure.reading_kwh_13;
+            return measure;
+        }catch(Exception e){
+            throw new AppException("Lo sentimos no pudimos editar un registro en la bitacora");
         }
     }
     /**
@@ -76,6 +91,24 @@ public class MeasureService {
             return measure;          
         }catch(Exception e){
             throw new AppException(e.getMessage());
+        }
+    }
+
+    public Measure getMeasureByTurn(long turn_id){
+        try{
+            Measure measure = Measure.find("turn.id", turn_id).firstResult();
+            return measure;            
+        }catch(Exception e){
+            throw new AppException("No existe el registro de medidas");
+        }
+    }
+
+    public List<Measure> getMeasureByMonth(int month){
+        try{
+            List<Measure> measure = Measure.find("MONTH(turn.start_date)", month).list();
+            return measure;            
+        }catch(Exception e){
+            throw new AppException("No existe el registro de medidores");
         }
     }
 }

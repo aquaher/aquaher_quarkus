@@ -70,7 +70,7 @@ public class BitacoraApi {
         return Response.ok(bService.createBitacora(bitacora)).build();
     }
     @GET
-    @Path("date/{date}")
+    @Path("date")
     @APIResponse(
             responseCode = "200",
             description = "Respuesta ok ",
@@ -86,7 +86,7 @@ public class BitacoraApi {
             )
     )
     @Parameters
-    public Response getBitacoraByDate(@PathParam String date){
+    public Response getBitacoraByDate(@QueryParam String date){
         return Response.ok(bService.getBitacoraByDate(LocalDate.parse(date))).build();
     }
     @GET
@@ -172,5 +172,25 @@ public class BitacoraApi {
         @QueryParam(value = "date") String date,
         @QueryParam(value = "turn") Long turn){
         return Response.ok(bService.getBitacoraByTurnAndDate(LocalDate.parse(date), turn)).build();
+    }
+    @GET
+    @Path("month")
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Bitacora[].class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    @Parameters
+    public Response getBitacoraByMonth(@QueryParam int number){
+        return Response.ok(bService.getBitacoraByMonth(number)).build();
     }
 }

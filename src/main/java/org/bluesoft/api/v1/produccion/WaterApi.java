@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -69,6 +70,24 @@ public class WaterApi {
     @Parameters
     public Response createWater(Water water){
         return Response.ok(wService.createWater(water)).build();
+    }
+    @PUT
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Water.class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    public Response editWater(Water water){
+        return Response.ok(wService.editWater(water)).build();
     }
     @GET
     @Path("date/{date}")

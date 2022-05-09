@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -68,7 +69,25 @@ public class MeasureApi {
     )
     @Parameters
     public Response createMeasure(Measure measure){
-        return Response.ok(mService.createBitacora(measure)).build();
+        return Response.ok(mService.createMeasure(measure)).build();
+    }
+    @PUT
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Measure.class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    public Response editMeasure(Measure measure){
+        return Response.ok(mService.editMeasure(measure)).build();
     }
     @GET
     @Path("date/{date}")
@@ -109,5 +128,31 @@ public class MeasureApi {
     @Parameters
     public Response getMeasureById(@PathParam Long measureId){
         return Response.ok(mService.getMeasureById(measureId)).build();
+    }
+    @GET
+    @Path("/turn")
+    @APIResponse(
+            responseCode = "200",
+            description = "Respuesta ok ",
+            content = @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = Measure.class)
+            )
+    )
+    @APIResponse(
+            responseCode = "404",
+            description = "Respuesta de error",
+            content= @Content(
+                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
+            )
+    )
+    @Parameters
+    public Response getMeasureByTurnId(@QueryParam Long turn_id){
+        return Response.ok(mService.getMeasureByTurn(turn_id)).build();
+    }
+
+    @GET
+    @Path("month")
+    public Response getMeasureByMonth(@QueryParam int number){
+        return Response.ok(mService.getMeasureByMonth(number)).build();
     }
 }
