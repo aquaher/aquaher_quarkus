@@ -4,7 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.bluesoft.models.Unit;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
@@ -15,4 +18,8 @@ public class Method extends PanacheEntityBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     public String name;
+    public String symbol;
+
+    @ManyToOne
+    public Unit unit;
 }

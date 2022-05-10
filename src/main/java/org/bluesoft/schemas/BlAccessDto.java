@@ -1,4 +1,4 @@
-package org.bluesoft.services;
+package org.bluesoft.schemas;
 
 import io.quarkus.hibernate.orm.panache.common.ProjectedFieldName;
 import io.quarkus.runtime.annotations.RegisterForReflection;

@@ -1,4 +1,4 @@
-package org.bluesoft.models.produccion.dto;
+package org.bluesoft.schemas.produccion.dto;
 
 import io.quarkus.hibernate.orm.panache.common.ProjectedFieldName;
 import io.quarkus.runtime.annotations.RegisterForReflection;

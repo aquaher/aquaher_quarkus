@@ -14,7 +14,7 @@ import io.quarkus.hibernate.orm.panache.PanacheQuery;
 
 import org.bluesoft.errors.AppException;
 import org.bluesoft.models.produccion.Water;
-import org.bluesoft.models.produccion.dto.WaterDto;
+import org.bluesoft.schemas.produccion.dto.WaterDto;
 
 @ApplicationScoped
 public class WaterService {

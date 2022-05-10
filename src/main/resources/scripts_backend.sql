@@ -1,27 +1,46 @@
 USE backend;
 
-DROP PROCEDURE IF EXISTS `stp_parameter`;
+DROP PROCEDURE IF EXISTS `stp_create_parameter`;
 DROP PROCEDURE IF EXISTS `stp_verify_access_turn`;
 DROP PROCEDURE IF EXISTS `stp_turn_access`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `stp_parameter` (
-	IN _name VARCHAR(255),
-	IN _method_id BIGINT,
-	IN _quality_id BIGINT, 
-	IN _unit_id BIGINT
+CREATE PROCEDURE `stp_create_parameter` (
+	IN _tank_id INTEGER,
+    IN _lote VARCHAR(255)
 )
 BEGIN
-	INSERT INTO `p_parameter`
-    (name, method_id, quality_id, unit_id )
-    VALUES 
-    (_name, _method_id, _quality_id, _unit_id );
-    
-    SELECT * FROM 
-    `p_parameter` 
-    ORDER BY id DESC
-	LIMIT 1;
+	SET @fecha = DATE(NOW());
+    INSERT INTO `p_quality` (`date`,`lote`) VALUES (@fecha,_lote);
+    SET @quality_id = (SELECT `id` FROM `p_quality` WHERE `date` = @fecha AND `lote` = _lote);
+    IF _tank_id = 1 OR _tank_id = 2 THEN
+		SET @i = 1;
+        loop_label:LOOP
+			IF @i < 17 THEN
+				INSERT INTO `p_parameter` (`method_id`,`quality_id`,`tank_id`) VALUES (@i,@quality_id,_tank_id);
+				SET @i = @i + 1;
+			ELSE 
+				LEAVE loop_label;
+			END IF;
+			ITERATE loop_label;
+		END LOOP;
+	ELSEIF _tank_id = 3 OR _tank_id = 5 THEN
+		SET @i = 1;
+        loop_label:LOOP
+			IF @i = 1 THEN
+				INSERT INTO `p_parameter` (`method_id`,`quality_id`,`tank_id`) VALUES (17,@quality_id,_tank_id);
+				SET @i = @i + 1;
+			ELSEIF @i < 9 THEN
+				INSERT INTO `p_parameter` (`method_id`,`quality_id`,`tank_id`) VALUES (@i,@quality_id,_tank_id);
+				SET @i = @i + 1;
+			ELSE 
+				LEAVE loop_label;
+			END IF;
+			ITERATE loop_label;
+		END LOOP;
+	END IF;
+    SELECT * FROM `p_parameter` WHERE `quality_id` = @quality_id AND `tank_id` = _tank_id;
 END$$
 
 CREATE PROCEDURE `stp_verify_access_turn` ()
@@ -94,62 +113,75 @@ DELIMITER ;
 
 /*INSET DATA INITIAL*/
 /*unidad de medida por defecto bl_unit*/
-INSERT INTO `bl_unit` (name,symbol) VALUES ('METROS CUBICOS', 'M3');
+INSERT INTO `bl_unit` (`name`,`symbol`) VALUES ('METROS CUBICOS', 'M3');#1
+INSERT INTO `bl_unit` (`name`,`symbol`) VALUES ('TURBIDEZ', 'NTU');#2
+INSERT INTO `bl_unit` (`name`,`symbol`) VALUES ('MICROSIEMENS POR CENTÍMETRO', 'µS/cm');#3
+INSERT INTO `bl_unit` (`name`,`symbol`) VALUES ('POR MIL', '‰');#4
+INSERT INTO `bl_unit` (`name`,`symbol`) VALUES ('MILIGRAMO POR LITRO', 'mg/l');#5
+INSERT INTO `bl_unit` (`name`,`symbol`) VALUES ('UNIDADES DE PLATINO SOBRE COBALTO', 'UPC');#6
+INSERT INTO `bl_unit` (`name`,`symbol`) VALUES ('NINGUNA', '-');#7
+
+/*metodos*/
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('pH (25 °C)','APHA 4500-H+ B',7);#1
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Turbiedad','APHA 2130 B',2);#2
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Conductividad','APHA 2510 B',3);#3
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Salinidad','APHA 2520 B',4);#4
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Sólidos disueltos totales','APHA 2510 B',5);#5
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Dureza total','APHA 2340 C',5);#6
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Color Aparente','Colorimetria',5);#7
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Color Verdadero','Colorimetria',5);#8
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Cloruro','ATP Orion Method AC2017',5);#9
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Alcalinidad (pH 8,2)','APHA 2320 B"',5);#10
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Cobre','Method 8506V',5);#11
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Sulfato','APHA 4500-SO4²ˉ Eʹʹʹ',5);#12
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Nitrito','ATP Orion Method AC2046',5);#13
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Hierro','APHA 3500-Fe IV',5);#14
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Manganeso','ATP Orion Method AC4P55',5);#15
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Sílice','APHA 4500-Si D VI',5);#16
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('pH (28 °C)','APHA 4500-H+ B',7);#17
+
 /*datos de los tanques p_tank*/
-INSERT INTO `p_tank` (name,water) VALUES ('TQ-1','AGUA PURIFICADA');
-INSERT INTO `p_tank` (name,water) VALUES ('TQ-2','AGUA PURIFICADA');
-INSERT INTO `p_tank` (name,water) VALUES ('TQ-3','AGUA GENÉRICA');
-INSERT INTO `p_tank` (name,water) VALUES ('TQ-4','ALIMENTACIÓN DE OSMOSIS');
-INSERT INTO `p_tank` (name,water) VALUES ('TQ-5','AGUA ULTRAFILTRADA');
-INSERT INTO `p_tank` (name,water) VALUES ('TQ-6','ALIMENTACIÓN DE ULTRAFILTRACIÓN');
-/* eventos para la bitácora de produccion tabla p_l_event*/
-INSERT INTO `p_l_event` (name) VALUES ('PLANTA EN PRODUCCIÓN');
-INSERT INTO `p_l_event` (name) VALUES ('PLANTA DETENIDA');
-INSERT INTO `p_l_event` (name) VALUES ('FLUXING');
-INSERT INTO `p_l_event` (name) VALUES ('RECIBO TURNO');
-INSERT INTO `p_l_event` (name) VALUES ('ENTREGO TURNO');
-INSERT INTO `p_l_event` (name) VALUES ('ASEO');
-INSERT INTO `p_l_event` (name) VALUES ('DESINFECCION');
-INSERT INTO `p_l_event` (name) VALUES ('RETROLAVADOS');
-INSERT INTO `p_l_event` (name) VALUES ('DOSIFICACION');
-/*métodos de analisis p_method*/
-INSERT INTO `p_method` (name) VALUES ('APHA 4500-H^+ B');
-INSERT INTO `p_method` (name) VALUES ('APHA 2130 B');
-INSERT INTO `p_method` (name) VALUES ('APHA 2510 B');
-INSERT INTO `p_method` (name) VALUES ('APHA 2520 B');
-INSERT INTO `p_method` (name) VALUES ('APHA 2520 B"');
-INSERT INTO `p_method` (name) VALUES ('APHA 2340 C ');
-INSERT INTO `p_method` (name) VALUES ('COLORIMETRIA');
-INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC2017');
-INSERT INTO `p_method` (name) VALUES ('METHOD 8506V');
-INSERT INTO `p_method` (name) VALUES ('APHA 4500-SO4^2- E\'"');
-INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC2046');
-INSERT INTO `p_method` (name) VALUES ('APHA 3500-Fe^IV');
-INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC4P55');
-INSERT INTO `p_method` (name) VALUES ('APHA 4500-Si D^VI');
-INSERT INTO `p_method` (name) VALUES ('ATP ORION METHOD AC3032C');
+INSERT INTO `p_tank` (`name`,`water`) VALUES ('TQ-1','AGUA PURIFICADA');
+INSERT INTO `p_tank` (`name`,`water`) VALUES ('TQ-2','AGUA PURIFICADA');
+INSERT INTO `p_tank` (`name`,`water`) VALUES ('TQ-3','AGUA GENÉRICA');
+INSERT INTO `p_tank` (`name`,`water`) VALUES ('TQ-4','ALIMENTACIÓN DE OSMOSIS');
+INSERT INTO `p_tank` (`name`,`water`) VALUES ('TQ-5','AGUA ULTRAFILTRADA');
+INSERT INTO `p_tank` (`name`,`water`) VALUES ('TQ-6','ALIMENTACIÓN DE ULTRAFILTRACIÓN');
+/* eventos para la bit`ácor`a` de p`roduccion tabla p_l_event*/
+INSERT INTO `p_l_event` (`name`) VALUES ('PLANTA EN PRODUCCIÓN');
+INSERT INTO `p_l_event` (`name`) VALUES ('PLANTA DETENIDA');
+INSERT INTO `p_l_event` (`name`) VALUES ('FLUXING');
+INSERT INTO `p_l_event` (`name`) VALUES ('RECIBO TURNO');
+INSERT INTO `p_l_event` (`name`) VALUES ('ENTREGO TURNO');
+INSERT INTO `p_l_event` (`name`) VALUES ('ASEO');
+INSERT INTO `p_l_event` (`name`) VALUES ('DESINFECCION');
+INSERT INTO `p_l_event` (`name`) VALUES ('RETROLAVADOS');
+INSERT INTO `p_l_event` (`name`) VALUES ('DOSIFICACION');
 /** TURNO*/
-INSERT INTO `p_turn` (start_date) VALUES ('1900-04-04 07:00:00');
+INSERT INTO `p_turn` (`start_date`) VALUES ('1900-04-04 07:00:00');
 
 /* MENU*/
 /*el icono debe ser el mismo nombre que el path final y la lista que envio debe estar ordenada*/
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('INICIO',0,'INICIO','inicio','');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('INICIO',0,'INICIO','inicio','');
 /*MENU PRODUCCION*/
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'PRODUCCION','produccion','produccion');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'PRODUCCION','produccion','produccion');
+/*CONTROL CALIDAD*/
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'CONTROL DE CALIDAD','control_calidad','produccion/control_calidad');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'CALIDAD DE AGUA','agua','produccion/control_calidad/agua');
 /*OPERADORES*/
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'OPERADORES','operadores','produccion/operadores');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'VOLUMENES','volumen','produccion/operadores/volumen');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'BITÁCORA','bitacora','produccion/operadores/bitacora');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'MEDIDOR','medidor','produccion/operadores/medidor');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA PURIFICADA','purificada','produccion/operadores/purificada');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA ULTRAFILTRADA','ultrafiltrada','produccion/operadores/ultrafiltrada');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA GENERICA','generica','produccion/operadores/generica');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'OPERADORES','operadores','produccion/operadores');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'VOLUMENES','volumen','produccion/operadores/volumen');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'BITÁCORA','bitacora','produccion/operadores/bitacora');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'MEDIDOR','medidor','produccion/operadores/medidor');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA PURIFICADA','purificada','produccion/operadores/purificada');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA ULTRAFILTRADA','ultrafiltrada','produccion/operadores/ultrafiltrada');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA GENERICA','generica','produccion/operadores/generica');
 /*LISTA DE INFORMES PORDUCCION*/
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'LISTA DE INFORMES','informe','produccion/informe');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE BITÁCORA','bitacora','produccion/informe/bitacora');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE MEDIDORES','medidor','produccion/informe/medidor');
-#INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE TANQUES','tanque','produccion/datos_maestros/informe/tanque');
-INSERT INTO `backend`.`bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE VOLUMENES DE AGUA','volumen','produccion/informe/volumen');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'LISTA DE INFORMES','informe','produccion/informe');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE BITÁCORA','bitacora','produccion/informe/bitacora');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE MEDIDORES','medidor','produccion/informe/medidor');
+#INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE TANQUES','tanque','produccion/datos_maestros/informe/tanque');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE VOLUMENES DE AGUA','volumen','produccion/informe/volumen');
 
 
 /* TABLE KAYCLOAK*/

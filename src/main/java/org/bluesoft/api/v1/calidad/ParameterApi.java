@@ -1,92 +1,42 @@
 package org.bluesoft.api.v1.calidad;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.bluesoft.errors.AppMessageError;
 import org.bluesoft.models.produccion.calidad.Parameter;
-import org.bluesoft.services.CalidadService;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.bluesoft.services.calidad.ParameterService;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.eclipse.microprofile.openapi.annotations.media.Schema;
-import org.eclipse.microprofile.openapi.annotations.parameters.Parameters;
-import org.eclipse.microprofile.openapi.annotations.media.Content;
-import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
-@Path("parameter")
+@Path("parametro")
 @Produces(MediaType.APPLICATION_JSON)
-@Tag(name="Parameter API", description="Operaciones para el area de calidad")
+@Tag(name="Parametros", description="Operaciones para el area de control de calidad")
 public class ParameterApi {
 
     @Inject
-    CalidadService pService;
-    /**
-     * API PARAMETER
-     */
+    ParameterService pService;
+
     @GET
-    @APIResponse(
-            responseCode = "200",
-            description = "Respuesta ok ",
-            content = @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = Parameter[].class)
-            )
-    )
-    @APIResponse(
-            responseCode = "404",
-            description = "Respuesta de error",
-            content= @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
-            )
-    )
-    @Parameters
-    public Response getAllParameter(@QueryParam("quality_id") Long qualityId){
-        return Response.ok(pService.getParameterBy(qualityId)).build();
+    public Response getParametersByDateAndTank(@QueryParam String date, @QueryParam long tank_id){
+        return Response.ok(pService.getParametersByDateQualityAndTank(LocalDate.parse(date), tank_id)).build();
     }
 
     @POST
-    @APIResponse(
-            responseCode = "200",
-            description = "Respuesta ok ",
-            content = @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = Parameter.class)
-            )
-    )
-    @APIResponse(
-            responseCode = "404",
-            description = "Respuesta de error",
-            content= @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
-            )
-    )
-    public Response creacetParameter(Parameter parameter){
-        return Response.ok(pService.createParameter(parameter)).build();
+    public Response createParameters(@QueryParam int tank_id, @QueryParam String lote){
+        return Response.ok(pService.generateParameters(tank_id, lote)).build();
     }
 
-    @POST
-    @Path("list")
-    @APIResponse(
-            responseCode = "200",
-            description = "Respuesta ok ",
-            content = @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = Parameter[].class)
-            )
-    )
-    @APIResponse(
-            responseCode = "404",
-            description = "Respuesta de error",
-            content= @Content(
-                schema = @Schema(type = SchemaType.OBJECT, implementation = AppMessageError.class)
-            )
-    )
-    public Response creacetParameter(List<Parameter> parameter){
-        return Response.ok(pService.createParameter(parameter)).build();
+    @PUT
+    public Response createParameters(List<Parameter> parameters){
+        return Response.ok(pService.putParameters(parameters)).build();
     }
 }
