@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.bluesoft.models.BlUser;
+import org.bluesoft.models.session.BlUser;
 import org.bluesoft.services.BlServices;
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Query;

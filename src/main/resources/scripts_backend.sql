@@ -19,10 +19,10 @@ BEGIN
         loop_label:LOOP
 			IF @i < 17 THEN
 				INSERT INTO `p_parameter` (`method_id`,`quality_id`,`tank_id`) VALUES (@i,@quality_id,_tank_id);
-				SET @i = @i + 1;
 			ELSE 
 				LEAVE loop_label;
 			END IF;
+            SET @i = @i + 1;
 			ITERATE loop_label;
 		END LOOP;
 	ELSEIF _tank_id = 3 OR _tank_id = 5 THEN
@@ -30,13 +30,12 @@ BEGIN
         loop_label:LOOP
 			IF @i = 1 THEN
 				INSERT INTO `p_parameter` (`method_id`,`quality_id`,`tank_id`) VALUES (17,@quality_id,_tank_id);
-				SET @i = @i + 1;
-			ELSEIF @i < 9 THEN
+			ELSEIF @i < 9 AND @i > 1 THEN
 				INSERT INTO `p_parameter` (`method_id`,`quality_id`,`tank_id`) VALUES (@i,@quality_id,_tank_id);
-				SET @i = @i + 1;
 			ELSE 
 				LEAVE loop_label;
 			END IF;
+            SET @i = @i + 1;
 			ITERATE loop_label;
 		END LOOP;
 	END IF;
@@ -128,8 +127,8 @@ INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Conductividad','APHA 2
 INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Salinidad','APHA 2520 B',4);#4
 INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Sólidos disueltos totales','APHA 2510 B',5);#5
 INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Dureza total','APHA 2340 C',5);#6
-INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Color Aparente','Colorimetria',5);#7
-INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Color Verdadero','Colorimetria',5);#8
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Color Aparente','Colorimetria',6);#7
+INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Color Verdadero','Colorimetria',6);#8
 INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Cloruro','ATP Orion Method AC2017',5);#9
 INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Alcalinidad (pH 8,2)','APHA 2320 B"',5);#10
 INSERT INTO `p_method` (`name`,`symbol`,`unit_id`)VALUES('Cobre','Method 8506V',5);#11
@@ -180,9 +179,9 @@ INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCI
 INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',11,'LISTA DE INFORMES','informe','produccion/informe');
 INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',12,'INFORME DE BITÁCORA','bitacora','produccion/informe/bitacora');
 INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',13,'INFORME DE MEDIDORES','medidor','produccion/informe/medidor');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',14,'INFORME DE CALIDAD DE AGUA','agua','produccion/informe/agua');
 #INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE TANQUES','tanque','produccion/datos_maestros/informe/tanque');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',14,'INFORME DE VOLUMENES DE AGUA','volumen','produccion/informe/volumen');
-
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',15,'INFORME DE VOLUMENES DE AGUA','volumen','produccion/informe/volumen');
 
 /* TABLE KAYCLOAK*/
 USE keycloak;

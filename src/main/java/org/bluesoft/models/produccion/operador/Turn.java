@@ -6,7 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.bluesoft.models.session.BlUser;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
@@ -17,7 +20,10 @@ public class Turn extends PanacheEntityBase{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
     public Integer turn;
-    public String operador;
+    
+    @ManyToOne
+    public BlUser user;
+
     public LocalDateTime start_date;
     public LocalDateTime end_date;
     public Boolean active;

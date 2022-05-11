@@ -10,8 +10,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import org.bluesoft.errors.AppException;
-import org.bluesoft.models.AccessSchema;
-import org.bluesoft.models.BlAccess;
+import org.bluesoft.models.session.BlAccess;
+import org.bluesoft.schemas.AccessSchema;
 import org.bluesoft.schemas.BlAccessDto;
 import org.jboss.logging.Logger;
 

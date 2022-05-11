@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import org.bluesoft.errors.AppException;
-import org.bluesoft.models.BlUser;
+import org.bluesoft.models.session.BlUser;
 import org.jboss.logging.Logger;
 
 import javax.persistence.EntityManager;

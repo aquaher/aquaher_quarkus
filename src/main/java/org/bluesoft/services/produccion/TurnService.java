@@ -25,7 +25,7 @@ public class TurnService {
     public Turn updateTurn(Turn turn){
         try{
             Turn turno = Turn.findById(turn.id);
-            turno.operador = turn.operador;
+            turno.user = turn.user;
             return turno;
         }catch(Exception e){
             throw new AppException(e.getMessage());

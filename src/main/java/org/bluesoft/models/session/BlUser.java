@@ -1,4 +1,4 @@
-package org.bluesoft.models;
+package org.bluesoft.models.session;
 
 import java.util.Set;
 

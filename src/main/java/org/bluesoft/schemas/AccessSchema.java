@@ -1,4 +1,4 @@
-package org.bluesoft.models;
+package org.bluesoft.schemas;
 
 import java.util.ArrayList;
 import java.util.List;

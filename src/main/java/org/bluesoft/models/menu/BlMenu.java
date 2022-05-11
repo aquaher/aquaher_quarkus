@@ -1,4 +1,4 @@
-package org.bluesoft.models;
+package org.bluesoft.models.menu;
 
 import java.util.Set;
 
@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.bluesoft.models.session.BlAccess;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
