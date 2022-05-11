@@ -20,7 +20,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
     procedureName = "stp_create_parameter",
     resultClasses = Parameter.class,
     parameters = {
-        @StoredProcedureParameter(name="_tank_id", type=Integer.class, mode=ParameterMode.IN),
+        @StoredProcedureParameter(name="_tank_id", type=Long.class, mode=ParameterMode.IN),
         @StoredProcedureParameter(name="_lote", type=String.class, mode=ParameterMode.IN)
     }
 )

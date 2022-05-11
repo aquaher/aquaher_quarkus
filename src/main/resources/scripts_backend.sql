@@ -7,7 +7,7 @@ DROP PROCEDURE IF EXISTS `stp_turn_access`;
 DELIMITER $$
 
 CREATE PROCEDURE `stp_create_parameter` (
-	IN _tank_id INTEGER,
+	IN _tank_id BIGINT,
     IN _lote VARCHAR(255)
 )
 BEGIN
@@ -166,22 +166,22 @@ INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('INICIO',
 /*MENU PRODUCCION*/
 INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'PRODUCCION','produccion','produccion');
 /*CONTROL CALIDAD*/
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'CONTROL DE CALIDAD','control_calidad','produccion/control_calidad');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'CALIDAD DE AGUA','agua','produccion/control_calidad/agua');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',2,'CONTROL DE CALIDAD','control_calidad','produccion/control_calidad');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',3,'CALIDAD DE AGUA','agua','produccion/control_calidad/agua');
 /*OPERADORES*/
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'OPERADORES','operadores','produccion/operadores');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'VOLUMENES','volumen','produccion/operadores/volumen');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'BITÁCORA','bitacora','produccion/operadores/bitacora');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'MEDIDOR','medidor','produccion/operadores/medidor');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA PURIFICADA','purificada','produccion/operadores/purificada');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA ULTRAFILTRADA','ultrafiltrada','produccion/operadores/ultrafiltrada');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'AGUA GENERICA','generica','produccion/operadores/generica');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',4,'OPERADORES','operadores','produccion/operadores');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',5,'VOLUMENES','volumen','produccion/operadores/volumen');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',6,'BITÁCORA','bitacora','produccion/operadores/bitacora');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',7,'MEDIDOR','medidor','produccion/operadores/medidor');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',8,'AGUA PURIFICADA','purificada','produccion/operadores/purificada');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',9,'AGUA ULTRAFILTRADA','ultrafiltrada','produccion/operadores/ultrafiltrada');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',10,'AGUA GENERICA','generica','produccion/operadores/generica');
 /*LISTA DE INFORMES PORDUCCION*/
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'LISTA DE INFORMES','informe','produccion/informe');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE BITÁCORA','bitacora','produccion/informe/bitacora');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE MEDIDORES','medidor','produccion/informe/medidor');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',11,'LISTA DE INFORMES','informe','produccion/informe');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',12,'INFORME DE BITÁCORA','bitacora','produccion/informe/bitacora');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',13,'INFORME DE MEDIDORES','medidor','produccion/informe/medidor');
 #INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE TANQUES','tanque','produccion/datos_maestros/informe/tanque');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE VOLUMENES DE AGUA','volumen','produccion/informe/volumen');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',14,'INFORME DE VOLUMENES DE AGUA','volumen','produccion/informe/volumen');
 
 
 /* TABLE KAYCLOAK*/

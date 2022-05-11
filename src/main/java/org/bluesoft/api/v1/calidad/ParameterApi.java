@@ -31,7 +31,7 @@ public class ParameterApi {
     }
 
     @POST
-    public Response createParameters(@QueryParam int tank_id, @QueryParam String lote){
+    public Response createParameters(@QueryParam long tank_id, @QueryParam String lote){
         return Response.ok(pService.generateParameters(tank_id, lote)).build();
     }
 

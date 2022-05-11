@@ -26,7 +26,7 @@ public class BlUserAcessService {
     public List<AccessSchema> getAccessMenuUser(String id){
         try {
             
-            List<BlAccessDto> accesos = BlAccess.find("user.id = ?1 ORDER BY menu.id", id).project(BlAccessDto.class).list();
+            List<BlAccessDto> accesos = BlAccess.find("user.id = ?1 ORDER BY menu.orden", id).project(BlAccessDto.class).list();
             List<AccessSchema> menu = new ArrayList<>();
             accesos.forEach(data->{
                 List<String> nav = new ArrayList<>(Arrays.asList(data.path.split("/")));

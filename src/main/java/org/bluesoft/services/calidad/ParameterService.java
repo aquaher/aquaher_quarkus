@@ -1,7 +1,6 @@
 package org.bluesoft.services.calidad;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -32,8 +31,9 @@ public class ParameterService {
      * @param _tank_id int
      * @param _lote Strgin
      */
+    @SuppressWarnings("unchecked")
     @Transactional
-    public List<Parameter> generateParameters(int tank_id, String lote){
+    public List<Parameter> generateParameters(long tank_id, String lote){
         try {
             StoredProcedureQuery query = entityManager.
             createNamedStoredProcedureQuery("stp_create_parameter")
