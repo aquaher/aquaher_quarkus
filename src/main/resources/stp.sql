@@ -47,13 +47,7 @@ CREATE PROCEDURE `stp_register_turn`(
 	IN _user_id VARCHAR(255)
 )
 BEGIN
-	DECLARE username VARCHAR(255);
-	SET @now = NOW();
 	SET @time = TIME(NOW());
-
-	SELECT `username` INTO username FROM `bl_user` WHERE `id` = _user_id;
-
-	UPDATE `p_turn` SET `start_date` = @now WHERE `id` = _turn_id;
 
 	INSERT INTO `p_bitacora` (`start_time`,`end_time`,`section`,`turn_id`,`event_id`,`description`)
 	VALUES (@time,@time,'PRODUCCIÓN',_turn_id,4,CONCAT('Inicio de turno'));
@@ -67,7 +61,7 @@ CREATE PROCEDURE `stp_turn_finalize_and_create`(
 	IN _user_id VARCHAR(255)
 )
 BEGIN
-	DECLARE username VARCHAR(255);
+	DECLARE _username VARCHAR(255);
 	SET @now = NOW();
 	SET @date_now = DATE(NOW());
 	SET @time = TIME(NOW());
@@ -76,26 +70,26 @@ BEGIN
     SET @turn_3 = CONCAT(@date_now,' ',TIME('23:00:00'));
     SET @turn_4 = CONCAT(@date_now,' ',TIME('19:00:00'));
 
-	SELECT `username` INTO username FROM `bl_user` WHERE `id` = _user_id;
-
+	SELECT `username` INTO _username FROM `bl_user` WHERE `id` = _user_id;
+	SET @username = CONCAT('Entrego el turno a',' ',_username);
 	UPDATE `p_turn` SET `active` = 0, `end_date` = @now  WHERE `id` = _turn_id;
 
 	INSERT INTO `p_bitacora` (`start_time`,`end_time`,`section`,`turn_id`,`event_id`,`description`)
-	VALUES (@time,@time,'PRODUCCIÓN',_turn_id,5,CONCAT('Entrego el turno a',' ',username));
+	VALUES (@time,@time,'PRODUCCIÓN',_turn_id,5,@username );
 
 	IF DAYOFWEEK(NOW()) = 7 OR DAYOFWEEK(NOW()) = 1 THEN
 		IF @now >= @turn_1 AND @now <= @turn_4 THEN
-			INSERT INTO `p_turn` (`turn`,`user_id`,`active`) VALUES (1,_user_id,1);
+			INSERT INTO `p_turn` (`turn`,`start_date`,`user_id`,`active`) VALUES (1,@turn_1,_user_id,1);
 		ELSE
-			INSERT INTO `p_turn` (`turn`,`user_id`,`active`) VALUES (2,_user_id,1);
+			INSERT INTO `p_turn` (`turn`,`start_date`,`user_id`,`active`) VALUES (2,@turn_3,_user_id,1);
 		END IF;
 	ELSE
 		IF @now >= @turn_1 AND @now <= @turn_2 THEN
-			INSERT INTO `p_turn` (`turn`,`user_id`,`active`) VALUES (1,_user_id,1);
+			INSERT INTO `p_turn` (`turn`,`start_date`,`user_id`,`active`) VALUES (1,@turn_1,_user_id,1);
 		ELSEIF @now >= @turn_2 AND @now <= @turn_3 THEN
-			INSERT INTO `p_turn` (`turn`,`user_id`,`active`) VALUES (2,_user_id,1);
+			INSERT INTO `p_turn` (`turn`,`start_date`,`user_id`,`active`) VALUES (2,@turn_2,_user_id,1);
 		ELSE 
-			INSERT INTO `p_turn` (`turn`,`user_id`,`active`) VALUES (3,_user_id,1);
+			INSERT INTO `p_turn` (`turn`,`start_date`,`user_id`,`active`) VALUES (3,@turn_3,_user_id,1);
 		END IF;
 	END IF;
 	

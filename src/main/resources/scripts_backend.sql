@@ -72,5 +72,6 @@ INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCI
 INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',15,'INFORME DE VOLUMENES DE AGUA','volumen','produccion/informe/volumen');
 
 /*EL primer turno resgistrado manualmente*/
-INSERT INTO `p_turn` (`active`,`turn`,`user_id`) VALUES (1,3,'1114a451-4932-44d0-9002-eab94d47550a');
+USE backend;
+INSERT INTO `p_turn` (`active`,`turn`,`start_date`,`user_id`) VALUES (1,3,'2022-05-12 13:00:00','173c35f0-7d9b-44f1-b430-9277c595a5a8');
 
