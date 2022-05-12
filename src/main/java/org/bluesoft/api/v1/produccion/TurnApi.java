@@ -2,22 +2,14 @@ package org.bluesoft.api.v1.produccion;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.bluesoft.errors.AppMessageError;
-import org.bluesoft.helper.Messaje;
-import org.bluesoft.models.produccion.operador.Turn;
 import org.bluesoft.services.produccion.TurnService;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.eclipse.microprofile.openapi.annotations.media.Schema;
-import org.eclipse.microprofile.openapi.annotations.parameters.Parameters;
-import org.eclipse.microprofile.openapi.annotations.media.Content;
-import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
 @Path("turn")
 @Produces(MediaType.APPLICATION_JSON)
@@ -26,8 +18,28 @@ public class TurnApi {
     
     @Inject
     TurnService tService;
+
+    @GET
+    public Response getTurnByUserId(@QueryParam String id){
+        return Response.ok(tService.getTurnByUserId(id)).build();
+    }
+
+    @GET
+    @Path("finalize")
+    public Response endTurnAndCreate(@QueryParam long turn_id,@QueryParam String user_id){
+        return Response.ok(tService.endTurnAndCreate(turn_id, user_id)).build();
+    }
+
+    @GET
+    @Path("register")
+    public Response registerTurn(@QueryParam long turn_id,@QueryParam String user_id){
+        return Response.ok(tService.registerTurn(turn_id, user_id)).build();
+    }
+
     
-    @PUT
+}
+
+/*@PUT
     @APIResponse(
             responseCode = "200",
             description = "Respuesta ok ",
@@ -103,5 +115,4 @@ public class TurnApi {
     )
     public Response getTurn(){
         return Response.ok(tService.getTurn()).build();
-    }
-}
+    }*/
