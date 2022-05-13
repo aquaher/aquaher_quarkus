@@ -73,5 +73,5 @@ INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCI
 
 /*EL primer turno resgistrado manualmente*/
 USE backend;
-INSERT INTO `p_turn` (`active`,`turn`,`start_date`,`user_id`) VALUES (1,3,'2022-05-12 13:00:00','173c35f0-7d9b-44f1-b430-9277c595a5a8');
+INSERT INTO `p_turn` (`active`,`turn`,`start_date`,`user_id`) VALUES (1,3,'2022-05-12 19:00:00','29be5ffa-bb12-485d-ae77-e8592c3c8f5c');
 
