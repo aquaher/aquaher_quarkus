@@ -45,7 +45,7 @@ public class BlUserAcessService {
         if(hasChildren(nav)){
             MultiItem(
                 data.stream()
-                .filter(e->e.icon.equals(nav.get(0)))
+                .filter(e->e.getIcon().equals(nav.get(0)))
                 .findFirst()
                 .get(), 
                 item, 
@@ -62,6 +62,6 @@ public class BlUserAcessService {
     }
     private void MultiItem(AccessSchema data, BlAccessDto item,List<String> nav){
         nav.remove(0);
-        MenuItem(data.items, item, nav);
+        MenuItem(data.getItems(), item, nav);
     }
 }

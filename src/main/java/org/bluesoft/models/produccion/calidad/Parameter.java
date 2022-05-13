@@ -30,7 +30,7 @@ public class Parameter extends PanacheEntityBase{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-    public Double result;
+    public String result;
 
     @ManyToOne
     public Quality quality;

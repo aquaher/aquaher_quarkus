@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,7 +30,7 @@ public class Bitacora extends PanacheEntityBase{
 
     @OneToOne
     public Event event;
-
-    @Column(length = 500)
+    @Lob
+    @Column(length = 10000)
     public String description;
 }
