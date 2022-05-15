@@ -33,12 +33,13 @@ public class ParameterService {
      */
     @SuppressWarnings("unchecked")
     @Transactional
-    public List<Parameter> generateParameters(long tank_id, String lote){
+    public List<Parameter> generateParameters(long tank_id, String lote,LocalDate date){
         try {
             StoredProcedureQuery query = entityManager.
             createNamedStoredProcedureQuery("stp_create_parameter")
             .setParameter("_tank_id", tank_id)
-            .setParameter("_lote", lote);
+            .setParameter("_lote", lote)
+            .setParameter("_date", date);
             return query.getResultList();
         } catch (Exception e) {
             throw new AppException(e.getMessage());

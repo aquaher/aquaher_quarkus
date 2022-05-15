@@ -8,10 +8,11 @@ DELIMITER $$
 
 CREATE PROCEDURE `stp_create_parameter` (
 	IN _tank_id BIGINT,
-    IN _lote VARCHAR(255)
+    IN _lote VARCHAR(255),
+    IN _date DATE
 )
 BEGIN
-	SET @fecha = DATE(NOW());
+	SET @fecha = _date;
     INSERT INTO `p_quality` (`date`,`lote`) VALUES (@fecha,_lote);
     SET @quality_id = (SELECT `id` FROM `p_quality` WHERE `date` = @fecha AND `lote` = _lote);
     IF _tank_id = 1 OR _tank_id = 2 THEN

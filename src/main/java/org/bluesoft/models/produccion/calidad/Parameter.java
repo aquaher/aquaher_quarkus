@@ -1,5 +1,7 @@
 package org.bluesoft.models.produccion.calidad;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +23,8 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
     resultClasses = Parameter.class,
     parameters = {
         @StoredProcedureParameter(name="_tank_id", type=Long.class, mode=ParameterMode.IN),
-        @StoredProcedureParameter(name="_lote", type=String.class, mode=ParameterMode.IN)
+        @StoredProcedureParameter(name="_lote", type=String.class, mode=ParameterMode.IN),
+        @StoredProcedureParameter(name="_date",type=LocalDate.class,mode=ParameterMode.IN)
     }
 )
 @Entity

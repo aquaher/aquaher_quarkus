@@ -249,10 +249,10 @@ INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (1,'0ffa479e-5057
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (2,'0ffa479e-5057-47f4-804b-615e39a8def4');
 
 /*control de calidad usuario de prueba 3bac3b21-2bc3-451d-ba25-0ee8b210496d*/
-INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (1,'bd7136dd-1fa1-4b4e-a2e5-9871185816e9');
-INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (2,'bd7136dd-1fa1-4b4e-a2e5-9871185816e9');
-INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (3,'bd7136dd-1fa1-4b4e-a2e5-9871185816e9');
-INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (4,'bd7136dd-1fa1-4b4e-a2e5-9871185816e9');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (1,'ebb7b272-5812-4129-8205-eecf08076412');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (2,'ebb7b272-5812-4129-8205-eecf08076412');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (3,'ebb7b272-5812-4129-8205-eecf08076412');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (4,'ebb7b272-5812-4129-8205-eecf08076412');
 
 /*ventas*/
 
