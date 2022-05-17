@@ -1,5 +1,6 @@
 package org.bluesoft.services.produccion;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -59,6 +60,27 @@ public class VolumenService {
         try{
             Volumen volumen = Volumen.find("turn.id = ?1 AND tank.id = ?2", turn,tank).singleResult();
             return volumen;
+        }catch(Exception e){
+            throw new AppException(e.getMessage());
+        }
+    }
+    public List<Volumen> getVolByTurnAndRangueDate(String start_date,String end_date){
+        try{
+            LocalDateTime p = LocalDateTime.parse(start_date);
+            LocalDateTime s = LocalDateTime.parse(end_date);
+            List<Volumen> volumens = Volumen.find("turn.start_date BETWEEN ?1 AND ?2 ORDER BY id", p,s).list();
+            return volumens;
+        }catch(Exception e){
+            throw new AppException(e.getMessage());
+        }
+    }
+
+    public List<Volumen> getVolByTurnAndRangueDateAndTurn(String start_date,String end_date,int turn){
+        try{
+            LocalDateTime p = LocalDateTime.parse(start_date);
+            LocalDateTime s = LocalDateTime.parse(end_date);
+            List<Volumen> volumens = Volumen.find("turn.turn = ?1 AND turn.start_date BETWEEN ?2 AND ?3 ORDER BY id", turn,p,s).list();
+            return volumens;
         }catch(Exception e){
             throw new AppException(e.getMessage());
         }

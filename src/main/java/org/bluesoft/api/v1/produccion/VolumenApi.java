@@ -43,5 +43,15 @@ public class VolumenApi {
     public Response getVolumensByMonthAndTurn(@QueryParam int month,@QueryParam int turn, @QueryParam String name){
         return Response.ok(vService.getVolByTurnAndMonth(month, turn,name)).build();
     }
+    @GET
+    @Path("range")
+    public Response getVolByTurnAndRangueDate(@QueryParam String start_date,@QueryParam String end_date){
+        return Response.ok(vService.getVolByTurnAndRangueDate(start_date, end_date)).build();
+    }
+    @GET
+    @Path("range/turn")
+    public Response getVolByTurnAndRangueDateAndTurn(@QueryParam String start_date,@QueryParam String end_date,@QueryParam int turn){
+        return Response.ok(vService.getVolByTurnAndRangueDateAndTurn(start_date, end_date,turn)).build();
+    }
 
 }
