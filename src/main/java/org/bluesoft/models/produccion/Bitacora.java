@@ -30,6 +30,6 @@ public class Bitacora extends PanacheEntityBase{
     @OneToOne
     public Event event;
 
-    @Column(length = 10000)
+    @Column(length = 14000)
     public String description;
 }
