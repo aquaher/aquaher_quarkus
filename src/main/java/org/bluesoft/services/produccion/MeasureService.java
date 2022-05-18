@@ -1,6 +1,7 @@
 package org.bluesoft.services.produccion;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -106,6 +107,16 @@ public class MeasureService {
     public List<Measure> getMeasureByMonth(int month){
         try{
             List<Measure> measure = Measure.find("MONTH(turn.start_date)", month).list();
+            return measure;            
+        }catch(Exception e){
+            throw new AppException("No existe el registro de medidores");
+        }
+    }
+    public List<Measure> getMeasureByRangueDay(){
+        try{
+            LocalDateTime s = LocalDateTime.parse(LocalDate.now().toString()+"T00:00:00");
+            LocalDateTime e = LocalDateTime.parse(LocalDate.now().toString()+"T23:59:59");
+            List<Measure> measure = Measure.find("turn.start_date BETWEEN ?1 AND ?2",s,e).list();
             return measure;            
         }catch(Exception e){
             throw new AppException("No existe el registro de medidores");

@@ -155,4 +155,10 @@ public class MeasureApi {
     public Response getMeasureByMonth(@QueryParam int number){
         return Response.ok(mService.getMeasureByMonth(number)).build();
     }
+
+    @GET
+    @Path("day")
+    public Response getMeasureByDay(){
+        return Response.ok(mService.getMeasureByRangueDay()).build();
+    }
 }
