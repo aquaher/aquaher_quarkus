@@ -50,26 +50,30 @@ INSERT INTO `p_l_event` (`name`) VALUES ('DOSIFICACION');#9
 /* MENU*/
 /*el icono debe ser el mismo nombre que el path final y la lista que envio debe estar ordenada*/
 INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('INICIO',0,'INICIO','inicio','');
+/*MENU SISTEMA*/
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('SISTEMA',800,'USUARIOS DEL SISTEMA','sistema','sistema');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('SISTEMA',801,'USUARIOS','usuarios','sistema/usuarios');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('SISTEMA',801,'ACCESOS','accesos','sistema/accesos');
 /*MENU PRODUCCION*/
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'PRODUCCION','produccion','produccion');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',880,'PRODUCCION','produccion','produccion');
 /*CONTROL CALIDAD*/
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',2,'CONTROL DE CALIDAD','control_calidad','produccion/control_calidad');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',3,'CALIDAD DE AGUA','agua','produccion/control_calidad/agua');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',881,'CONTROL DE CALIDAD','control_calidad','produccion/control_calidad');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',882,'CALIDAD DE AGUA','agua','produccion/control_calidad/agua');
 /*OPERADORES*/
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',4,'OPERADORES','operadores','produccion/operadores');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',5,'VOLUMENES','volumen','produccion/operadores/volumen');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',6,'BITÁCORA','bitacora','produccion/operadores/bitacora');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',7,'MEDIDOR','medidor','produccion/operadores/medidor');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',8,'AGUA PURIFICADA','purificada','produccion/operadores/purificada');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',9,'AGUA ULTRAFILTRADA','ultrafiltrada','produccion/operadores/ultrafiltrada');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',10,'AGUA GENERICA','generica','produccion/operadores/generica');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',883,'OPERADORES','operadores','produccion/operadores');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',884,'VOLUMENES','volumen','produccion/operadores/volumen');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',885,'BITÁCORA','bitacora','produccion/operadores/bitacora');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',886,'MEDIDOR','medidor','produccion/operadores/medidor');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',887,'AGUA PURIFICADA','purificada','produccion/operadores/purificada');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',888,'AGUA ULTRAFILTRADA','ultrafiltrada','produccion/operadores/ultrafiltrada');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',889,'AGUA GENERICA','generica','produccion/operadores/generica');
 /*LISTA DE INFORMES PORDUCCION*/
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',11,'LISTA DE INFORMES','informe','produccion/informe');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',12,'INFORME DE BITÁCORA','bitacora','produccion/informe/bitacora');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',13,'INFORME DE MEDIDORES','medidor','produccion/informe/medidor');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',14,'INFORME DE CALIDAD DE AGUA','agua','produccion/informe/agua');
-#INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',1,'INFORME DE TANQUES','tanque','produccion/datos_maestros/informe/tanque');
-INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',15,'INFORME DE VOLUMENES DE AGUA','volumen','produccion/informe/volumen');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',890,'LISTA DE INFORMES','informe','produccion/informe');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',891,'INFORME DE BITÁCORA','bitacora','produccion/informe/bitacora');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',892,'INFORME DE MEDIDORES','medidor','produccion/informe/medidor');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',893,'INFORME DE CALIDAD DE AGUA','agua','produccion/informe/agua');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',894,'INFORME DE VOLUMENES DE AGUA','volumen','produccion/informe/volumen');
+INSERT INTO `bl_menu` (`module`,`orden`,`title`,`icon`,`path`) VALUES ('PRODUCCION',895,'INFORME DE PRODUCCION','produccion_total','produccion/informe/produccion_total');
 
 /*EL primer turno resgistrado manualmente*/
 #USE backend;

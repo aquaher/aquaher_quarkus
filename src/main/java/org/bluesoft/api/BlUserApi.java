@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.bluesoft.models.session.BlUser;
-import org.bluesoft.services.BlServices;
+import org.bluesoft.services.BlUserService;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
@@ -22,7 +22,7 @@ import org.jboss.resteasy.annotations.jaxrs.PathParam;
 public class BlUserApi {
 
     @Inject
-    BlServices uServices;
+    BlUserService uServices;
 
     @GET
     public List<BlUser> getAlUsers(){

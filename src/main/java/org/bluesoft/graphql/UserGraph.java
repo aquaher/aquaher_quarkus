@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.bluesoft.models.session.BlUser;
-import org.bluesoft.services.BlServices;
+import org.bluesoft.services.BlUserService;
 import org.eclipse.microprofile.graphql.GraphQLApi;
 import org.eclipse.microprofile.graphql.Query;
 
@@ -15,7 +15,7 @@ import io.vertx.core.cli.annotations.Description;
 public class UserGraph {
 
     @Inject
-    BlServices blServices;
+    BlUserService blServices;
 
     @Query("allUsers") 
     @Description("Get all Users from") 

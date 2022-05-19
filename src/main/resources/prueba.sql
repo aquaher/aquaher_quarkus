@@ -238,6 +238,8 @@ INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (8,'3bac3b21-2bc3
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (9,'3bac3b21-2bc3-451d-ba25-0ee8b210496d');
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (10,'3bac3b21-2bc3-451d-ba25-0ee8b210496d');
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (11,'3bac3b21-2bc3-451d-ba25-0ee8b210496d');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (12,'3bac3b21-2bc3-451d-ba25-0ee8b210496d');
+INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (16,'3bac3b21-2bc3-451d-ba25-0ee8b210496d');
 
 /* produccion usuario  de prueba*/
 INSERT INTO `backend`.`bl_access` (`menu_id`,`user_id`) VALUES (12,'0ffa479e-5057-47f4-804b-615e39a8def4');

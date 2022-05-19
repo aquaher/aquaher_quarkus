@@ -14,7 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 @ApplicationScoped
-public class BlServices {
+public class BlUserService {
 
     @Inject
     Logger log;
