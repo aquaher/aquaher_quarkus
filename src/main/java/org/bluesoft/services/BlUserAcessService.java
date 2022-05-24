@@ -8,6 +8,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import org.bluesoft.errors.AppException;
 import org.bluesoft.models.session.BlAccess;
@@ -23,6 +24,34 @@ public class BlUserAcessService {
     @Inject
     EntityManager entityManager;
 
+    @Transactional
+    public void deleteAccess(long id){
+        try {
+            BlAccess.findById(id).delete();
+        } catch (Exception e) {
+            throw new AppException(e.getMessage());
+        }
+    }
+
+    @Transactional
+    public void postAccess(BlAccess access){
+        try {
+            access.persist();
+        } catch (Exception e) {
+            throw new AppException(e.getMessage());
+        }
+    }
+
+    public List<BlAccess> getAccesos(String id){
+        try {
+            
+            List<BlAccess> accesos = BlAccess.find("user.id = ?1 ORDER BY menu.orden", id).list();
+            return accesos;
+            //return createList(accesos);
+        } catch (Exception e) {
+            throw new AppException(e.getMessage());
+        }
+    }
     public List<AccessSchema> getAccessMenuUser(String id){
         try {
             
