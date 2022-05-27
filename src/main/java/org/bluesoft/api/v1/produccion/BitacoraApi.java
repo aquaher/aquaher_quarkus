@@ -196,7 +196,7 @@ public class BitacoraApi {
 
     @GET
     @Path("rangue")
-    public Response getBitacoraRangue(@QueryParam int turn){
-        return Response.ok(bService.getBitacoraRangue(turn)).build();
+    public Response getBitacoraRangue(){
+        return Response.ok(bService.getBitacoraRangue()).build();
     }
 }

@@ -140,11 +140,11 @@ public class BitacoraService {
         }
     }
 
-    public List<Bitacora> getBitacoraRangue(int turn){
+    public List<Bitacora> getBitacoraRangue(){
         try {
             LocalDateTime startDate = LocalDateTime.parse(LocalDate.now().toString()+"T00:00:00");
             LocalDateTime endDate = LocalDateTime.parse(LocalDate.now().plusDays(1).toString()+"T07:00:00");
-            List<Bitacora> elements = Bitacora.list("turn.turn = ?1 AND turn.start_date BETWEEN ?2 AND ?3 ORDER BY id", turn,startDate,endDate);
+            List<Bitacora> elements = Bitacora.list("turn.start_date BETWEEN ?2 AND ?3 ORDER BY id", startDate,endDate);
             return elements;
         } catch (Exception e) {
             throw new AppException(e.getMessage());
