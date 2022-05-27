@@ -1,6 +1,7 @@
 package org.bluesoft.services.produccion;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -135,6 +136,17 @@ public class BitacoraService {
             if(bitacora.isEmpty()) throw new AppException("No existen datos ");
             return bitacora;            
         }catch(Exception e){
+            throw new AppException(e.getMessage());
+        }
+    }
+
+    public List<Bitacora> getBitacoraRangue(int turn){
+        try {
+            LocalDateTime startDate = LocalDateTime.parse(LocalDate.now().toString()+"T00:00:00");
+            LocalDateTime endDate = LocalDateTime.parse(LocalDate.now().plusDays(1).toString()+"T07:00:00");
+            List<Bitacora> elements = Bitacora.list("turn.turn = ?1 AND turn.start_date BETWEEN ?2 AND ?3 ORDER BY id", turn,startDate,endDate);
+            return elements;
+        } catch (Exception e) {
             throw new AppException(e.getMessage());
         }
     }

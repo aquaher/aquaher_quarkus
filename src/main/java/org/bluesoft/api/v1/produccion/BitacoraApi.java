@@ -193,4 +193,10 @@ public class BitacoraApi {
     public Response getBitacoraByMonth(@QueryParam int number){
         return Response.ok(bService.getBitacoraByMonth(number)).build();
     }
+
+    @GET
+    @Path("rangue")
+    public Response getBitacoraRangue(@QueryParam int turn){
+        return Response.ok(bService.getBitacoraRangue(turn)).build();
+    }
 }

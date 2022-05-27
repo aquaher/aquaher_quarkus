@@ -115,7 +115,7 @@ public class MeasureService {
     public List<Measure> getMeasureByRangueDay(){
         try{
             LocalDateTime s = LocalDateTime.parse(LocalDate.now().toString()+"T00:00:00");
-            LocalDateTime e = LocalDateTime.parse(LocalDate.now().toString()+"T23:59:59");
+            LocalDateTime e = LocalDateTime.parse(LocalDate.now().plusDays(1).toString()+"T07:00:00");
             List<Measure> measure = Measure.find("turn.start_date BETWEEN ?1 AND ?2",s,e).list();
             return measure;            
         }catch(Exception e){
