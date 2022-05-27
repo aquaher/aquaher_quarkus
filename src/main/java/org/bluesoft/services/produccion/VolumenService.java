@@ -58,7 +58,7 @@ public class VolumenService {
     public Volumen getVolByTurnAndTank(long turn,long tank){
 
         try{
-            Volumen volumen = Volumen.find("turn.id = ?1 AND tank.id = ?2", turn,tank).singleResult();
+            Volumen volumen = Volumen.find("turn.id = ?1 AND tank.id = ?2", turn,tank).firstResult();
             return volumen;
         }catch(Exception e){
             throw new AppException(e.getMessage());
