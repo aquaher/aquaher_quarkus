@@ -142,7 +142,7 @@ public class BitacoraService {
 
     public List<Bitacora> getBitacoraRangue(){
         try {
-            LocalDateTime startDate = LocalDateTime.parse(LocalDate.now().toString()+"T00:00:00");
+            LocalDateTime startDate = LocalDateTime.parse(LocalDate.now().minusDays(1).toString()+"T07:00:00");
             LocalDateTime endDate = LocalDateTime.parse(LocalDate.now().plusDays(1).toString()+"T07:00:00");
             List<Bitacora> elements = Bitacora.list("turn.start_date BETWEEN ?2 AND ?3 ORDER BY id", startDate,endDate);
             return elements;
