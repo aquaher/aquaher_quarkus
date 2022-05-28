@@ -144,7 +144,7 @@ public class BitacoraService {
         try {
             LocalDateTime startDate = LocalDateTime.parse(LocalDate.now().minusDays(1).toString()+"T07:00:00");
             LocalDateTime endDate = LocalDateTime.parse(LocalDate.now().plusDays(1).toString()+"T07:00:00");
-            List<Bitacora> elements = Bitacora.list("turn.start_date BETWEEN ?2 AND ?3 ORDER BY id", startDate,endDate);
+            List<Bitacora> elements = Bitacora.list("turn.start_date BETWEEN ?1 AND ?2 ORDER BY id", startDate,endDate);
             return elements;
         } catch (Exception e) {
             throw new AppException(e.getMessage());
