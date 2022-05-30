@@ -12,6 +12,8 @@ import org.bluesoft.errors.AppException;
 import org.bluesoft.models.produccion.Volumen;
 import org.jboss.logging.Logger;
 
+import io.quarkus.panache.common.Sort;
+
 @ApplicationScoped
 public class VolumenService {
     @Inject
@@ -93,6 +95,14 @@ public class VolumenService {
             List<Volumen> volumens = Volumen.find("turn.turn = ?1 AND tank.id = ?2 AND turn.start_date BETWEEN ?3 AND ?4 ORDER BY id", turn,tank,p,s).list();
             return volumens;
         }catch(Exception e){
+            throw new AppException(e.getMessage());
+        }
+    }
+
+    public Volumen getVolByLast(){
+        try {
+            return Volumen.findAll(Sort.by("id").descending()).firstResult();
+        } catch (Exception e) {
             throw new AppException(e.getMessage());
         }
     }

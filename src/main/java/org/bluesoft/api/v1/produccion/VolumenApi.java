@@ -59,5 +59,9 @@ public class VolumenApi {
     public Response getVolByTurnAndRangueDateAndTurnAndTank(@QueryParam String start_date,@QueryParam String end_date,@QueryParam int turn,@QueryParam long tank_id){
         return Response.ok(vService.getVolByTurnAndRangueDateAndTurnAndTank(start_date, end_date,turn,tank_id)).build();
     }
-
+    @GET
+    @Path("last")
+    public Response getVolByLast(){
+        return Response.ok(vService.getVolByLast()).build();
+    }
 }
