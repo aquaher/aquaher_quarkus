@@ -99,9 +99,9 @@ public class VolumenService {
         }
     }
 
-    public Volumen getVolByLast(){
+    public Volumen getVolByLast(long tankId){
         try {
-            return Volumen.findAll(Sort.by("id").descending()).firstResult();
+            return Volumen.find("tank.id",Sort.by("id").descending(),tankId).firstResult();
         } catch (Exception e) {
             throw new AppException(e.getMessage());
         }

@@ -61,7 +61,7 @@ public class VolumenApi {
     }
     @GET
     @Path("last")
-    public Response getVolByLast(){
-        return Response.ok(vService.getVolByLast()).build();
+    public Response getVolByLast(@QueryParam long tankId){
+        return Response.ok(vService.getVolByLast(tankId)).build();
     }
 }

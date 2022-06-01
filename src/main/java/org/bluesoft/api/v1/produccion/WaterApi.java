@@ -210,4 +210,14 @@ public class WaterApi {
     public Response getWaterByWater(@QueryParam String tankName,@QueryParam int month){
         return Response.ok(wService.getWaterByTankAndMonth(tankName, month)).build();
     }
+    @GET
+    @Path("rangue")
+    public Response getWaterByWaterAndRangue(@QueryParam long tankId,@QueryParam String startDate, @QueryParam String endDate){
+        return Response.ok(wService.getWaterByTankAndRangue(tankId, startDate,endDate)).build();
+    }
+    @GET
+    @Path("rangue/todos")
+    public Response getWaterByRangue(@QueryParam String startDate, @QueryParam String endDate){
+        return Response.ok(wService.getWaterByRangueTodos(startDate,endDate)).build();
+    }
 }

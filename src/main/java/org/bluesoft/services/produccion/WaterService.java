@@ -1,6 +1,7 @@
 package org.bluesoft.services.produccion;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -178,6 +179,28 @@ public class WaterService {
         try {
             PanacheQuery<Water> query = Water.find("tank.name = ?1 AND MONTH(turn.start_date) = ?2", tankName, month);
             return query.list();
+        } catch (Exception e) {
+            throw new AppException(e.getMessage());
+        }
+    }
+
+    public List<Water> getWaterByTankAndRangue(long tank,String start_date,String end_date){
+        try {
+            
+            LocalDateTime startDateTime = LocalDateTime.parse(start_date.concat("T00:00:00"));
+            LocalDateTime endDateTime = LocalDateTime.parse(end_date.concat("23:59:59"));
+            List<Water> query = Water.find("tank.id = ?1 AND turn.start_date BETWEEN ?2 AND ?3 ORDER BY id", tank,startDateTime, endDateTime).list();
+            return query;
+        } catch (Exception e) {
+            throw new AppException(e.getMessage());
+        }
+    }
+    public List<Water> getWaterByRangueTodos(String start_date,String end_date){
+        try {
+            LocalDateTime startDateTime = LocalDateTime.parse(start_date.concat("T00:00:00"));
+            LocalDateTime endDateTime = LocalDateTime.parse(end_date.concat("23:59:59"));
+            List<Water> query = Water.find("turn.start_date BETWEEN ?1 AND ?2 ORDER BY id",startDateTime, endDateTime).list();
+            return query;
         } catch (Exception e) {
             throw new AppException(e.getMessage());
         }
