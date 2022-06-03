@@ -150,4 +150,14 @@ public class BitacoraService {
             throw new AppException(e.getMessage());
         }
     }
+    public List<Bitacora> getBitacoraRangueDefined(String start_date,String end_date){
+        try{
+            LocalDateTime s = LocalDateTime.parse(start_date.concat("T00:00:00"));
+            LocalDateTime e = LocalDateTime.parse(end_date.concat("T23:59:59"));
+            List<Bitacora> bitacoras = Bitacora.find("turn.start_date BETWEEN ?1 AND ?2",s,e).list();
+            return bitacoras;            
+        }catch(Exception e){
+            throw new AppException("No existe el registro de medidores");
+        }
+    }
 }

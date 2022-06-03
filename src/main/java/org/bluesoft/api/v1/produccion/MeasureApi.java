@@ -161,4 +161,10 @@ public class MeasureApi {
     public Response getMeasureByDay(){
         return Response.ok(mService.getMeasureByRangueDay()).build();
     }
+
+    @GET
+    @Path("rangue")
+    public Response getMeasureByRnague(@QueryParam String startDate,@QueryParam String endDate){
+        return Response.ok(mService.getMeasureByRangueDefined(startDate,endDate)).build();
+    }
 }

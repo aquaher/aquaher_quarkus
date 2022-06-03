@@ -122,4 +122,16 @@ public class MeasureService {
             throw new AppException("No existe el registro de medidores");
         }
     }
+    public List<Measure> getMeasureByRangueDefined(String start_date,String end_date){
+        try{
+            log.info(start_date);
+            LocalDateTime s = LocalDateTime.parse(start_date.concat("T00:00:00"));
+            LocalDateTime e = LocalDateTime.parse(end_date.concat("T23:59:59"));
+            List<Measure> measure = Measure.find("turn.start_date BETWEEN ?1 AND ?2",s,e).list();
+            return measure;            
+        }catch(Exception e){
+            log.info(e.getMessage());
+            throw new AppException("No existe el registro de medidores");
+        }
+    }
 }

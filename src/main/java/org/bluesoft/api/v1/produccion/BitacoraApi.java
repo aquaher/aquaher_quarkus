@@ -199,4 +199,10 @@ public class BitacoraApi {
     public Response getBitacoraRangue(){
         return Response.ok(bService.getBitacoraRangue()).build();
     }
+
+    @GET
+    @Path("rangue/defined")
+    public Response getBitacoraRangueDefined(@QueryParam String startDate,@QueryParam String endDate){
+        return Response.ok(bService.getBitacoraRangueDefined(startDate,endDate)).build();
+    }
 }
