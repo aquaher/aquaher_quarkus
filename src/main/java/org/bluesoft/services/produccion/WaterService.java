@@ -188,7 +188,7 @@ public class WaterService {
         try {
             
             LocalDateTime startDateTime = LocalDateTime.parse(start_date.concat("T00:00:00"));
-            LocalDateTime endDateTime = LocalDateTime.parse(end_date.concat("23:59:59"));
+            LocalDateTime endDateTime = LocalDateTime.parse(end_date.concat("T23:59:59"));
             List<Water> query = Water.find("tank.id = ?1 AND turn.start_date BETWEEN ?2 AND ?3 ORDER BY id", tank,startDateTime, endDateTime).list();
             return query;
         } catch (Exception e) {
@@ -198,7 +198,7 @@ public class WaterService {
     public List<Water> getWaterByRangueTodos(String start_date,String end_date){
         try {
             LocalDateTime startDateTime = LocalDateTime.parse(start_date.concat("T00:00:00"));
-            LocalDateTime endDateTime = LocalDateTime.parse(end_date.concat("23:59:59"));
+            LocalDateTime endDateTime = LocalDateTime.parse(end_date.concat("T23:59:59"));
             List<Water> query = Water.find("turn.start_date BETWEEN ?1 AND ?2 ORDER BY id",startDateTime, endDateTime).list();
             return query;
         } catch (Exception e) {
