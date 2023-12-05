@@ -10,4 +10,4 @@ services:
       - 63002:8080
     restart: always
 #./mvnw package
-
+#docker-compose up --build -d
