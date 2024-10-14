@@ -3,8 +3,8 @@ services:
   quarkus:
     build:
       context: .
-      dockerfile: src/main/docker/Dockerfile.native
-    image: native/aquaher
+      dockerfile: Dockerfile.native
+    image: backend
     container_name: backend
     ports:
       - 63002:8080
