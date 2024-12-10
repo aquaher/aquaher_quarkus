@@ -36,6 +36,7 @@ INSERT INTO `p_tank` (`name`,`water`) VALUES ('TQ-3','AGUA GENÉRICA');
 INSERT INTO `p_tank` (`name`,`water`) VALUES ('TQ-4','ALIMENTACIÓN DE OSMOSIS');
 INSERT INTO `p_tank` (`name`,`water`) VALUES ('TQ-5','AGUA ULTRAFILTRADA');
 INSERT INTO `p_tank` (`name`,`water`) VALUES ('TQ-6','ALIMENTACIÓN DE ULTRAFILTRACIÓN');
+
 /* eventos para la bit`ácor`a` de p`roduccion tabla p_l_event*/
 INSERT INTO `p_l_event` (`name`) VALUES ('PLANTA EN PRODUCCIÓN');#1
 INSERT INTO `p_l_event` (`name`) VALUES ('PLANTA DETENIDA');#2

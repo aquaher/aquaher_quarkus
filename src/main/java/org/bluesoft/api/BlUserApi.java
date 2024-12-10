@@ -3,10 +3,7 @@ package org.bluesoft.api;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -33,14 +30,34 @@ public class BlUserApi {
     public BlUser createUser(BlUser blUser){
         return uServices.createUser(blUser);
     }
+
     @GET
     @Path("{id}")
     public Response getUserById(@PathParam String id){
         return Response.ok(uServices.getById(id)).build();
     }
+
     @GET
     @Path("/operador")
     public Response getUserByOperador(){
         return Response.ok(uServices.getUserByOperador()).build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteUser(@PathParam("id") String id){
+        return Response.ok(uServices.deleteUser(id)).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    public Response updateUser(@PathParam("id") String id, BlUser user){
+        return Response.ok(uServices.updateUser(id,user)).build();
+    }
+
+    @PUT
+    @Path("/pw/{id}")
+    public Response updateUserPw(@PathParam("id") String id, BlUser pw){
+        return Response.ok(uServices.updateUserPw(id,pw)).build();
     }
 }
