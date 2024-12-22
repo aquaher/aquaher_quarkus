@@ -23,6 +23,8 @@ RUN chown 1001 /work \
 #RUN  ./mvnw package -Pnative
 #RUN  docker build -f src/main/docker/Dockerfile.native-micro -t quarkus/aquaher .
 COPY --chown=1001:root target/*-runner /work/application
+COPY --chown=1001:root src/main/resources/publicKey.pem /work/
+COPY --chown=1001:root src/main/resources/privateKey.pem /work/
 
 EXPOSE 8080
 USER 1001

@@ -50,7 +50,7 @@ public class AuthService {
                     .claim("preferred_username", user.getUsername())
                     .sign(secretKey);
 
-            return new TokenResponse(accessToken, 300, refreshToken, 1800, "Bearer", "openid profile email");
+            return new TokenResponse(accessToken, 36000, refreshToken, 36000, "Bearer", "openid profile email");
         } catch (Exception e) {
             throw new AppException(e.getMessage());
         }
@@ -69,7 +69,7 @@ public class AuthService {
 
     public Map<String, Object> getClaims(BlUser user) {
         long now = System.currentTimeMillis() / 1000;
-        long exp = now + 300;
+        long exp = now + 36000;
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("exp", exp);
